@@ -37,6 +37,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # LayoutProps/PageProps son tipos globales que genera Next en .next/types/.
+      # Sin typegen, tsc falla en CI porque .next/ viene vacío del checkout.
+      - name: Generar tipos de rutas
+        run: npx next typegen
+
       - name: Tipos
         run: npx tsc --noEmit
 
