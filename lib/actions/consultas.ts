@@ -1,10 +1,12 @@
 "use server";
 
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { getConfig } from "@/lib/config";
 import { createInquiry } from "@/lib/data/queries";
 import { ipDesdeForwardedFor } from "@/lib/forms/client-ip";
 import {
+  destinoDeConfirmacion,
   errorAEstado,
   parsearConsulta,
   valoresEnviados,
@@ -47,7 +49,16 @@ export async function enviarConsulta(
 
   const resultado = await createInquiry(consulta, ip === null ? undefined : { clientIp: ip });
 
-  return resultado.ok
-    ? { estado: "enviada", id: resultado.data.id }
-    : errorAEstado(resultado.failure, valores);
+  if (!resultado.ok) return errorAEstado(resultado.failure, valores);
+
+  // POST → 303 → GET con `?consulta=enviada`. Es lo que hace que la
+  // confirmación se vea también sin JavaScript (ver el comentario en
+  // lib/forms/consulta.ts) y que recargar no reenvíe la consulta.
+  //
+  // Si el formulario no mandó un destino válido se devuelve el estado, que es
+  // lo que el camino con JavaScript sabe renderizar.
+  const destino = destinoDeConfirmacion(formData);
+  if (destino !== null) redirect(destino);
+
+  return { estado: "enviada", id: resultado.data.id };
 }
