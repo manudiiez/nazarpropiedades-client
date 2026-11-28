@@ -52,7 +52,7 @@ lib/actions/     Server Actions
 - **Ninguna función de `queries.ts` lanza**: devuelven `DataResult<T>`, que es `{ok: true, data}` o `{ok: false, failure}`. La `failure` trae `title` y `message` en español, listos para mostrar.
 - **Un listado vacío y un detalle inexistente NO son fallas**: son estados válidos (`items: []`, `data: null`). La UI muestra "no encontramos propiedades" o llama a `notFound()`.
 - Las secciones accesorias (relacionadas, destacadas) usan `attemptOr` y degradan a `[]`: la página se muestra igual sin ese bloque. La falla igual se loguea.
-- **Las opciones de los filtros salen del catálogo de la API**, nunca de listas en el front. Si una etiqueta está mal escrita, se corrige en la API.
+- **Las opciones de los filtros salen de `getFacets()`**, nunca de listas en el front. El catálogo (`getCatalog()`) sirve para resolver etiquetas y para formularios donde hace falta el universo completo. Si una etiqueta está mal escrita, se corrige en la API.
 
 ### Trampas del contrato que ya costaron entender
 
@@ -70,10 +70,14 @@ lib/actions/     Server Actions
 
 `use cache` va en las funciones de los repositorios, **no en `HttpClient`**: los argumentos de una función cacheada tienen que ser serializables, y ni una instancia de clase ni un `AbortSignal` lo son.
 
-- Catálogo: `cacheLife("days")`, tag `catalogs`.
-- Listings y facets: `cacheLife("minutes")`, tags `listings` / `facets`.
+- Catálogo: `cacheLife("hours")`, tag `catalogs`.
+- Listings y facets: `cacheLife("minutes")` — revalida cada minuto —, tags `listings` / `facets`.
 
 No es una optimización: la API limita a 60/min por IP y los pedidos del server cuentan contra la IP del server. **El caché es lo que evita el 429.**
+
+Las 215 zonas del catálogo son una lista en el **código** de la API, no una tabla: el catálogo solo cambia cuando la API se despliega. Lo que cambia al cargar una propiedad son **facets** y el listado, que revalidan cada minuto.
+
+Por eso los combos del filtro se arman con **facets, no con el catálogo**: si el CRM carga una propiedad con un slug de zona que no está en el catálogo de la API, no va a aparecer nunca en `/catalogs` pero sí en `/facets`, con su etiqueta derivada. Facets es la verdad sobre lo que hay publicado.
 
 ### Variables de entorno
 

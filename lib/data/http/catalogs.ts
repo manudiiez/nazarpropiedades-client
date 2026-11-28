@@ -6,7 +6,10 @@ import { mapCatalog, mapFacets } from "./mappers";
 
 async function fetchRawCatalog(baseUrl: string, sections: string[]): Promise<unknown> {
   "use cache";
-  cacheLife("days");
+  // Ver el comentario en http/listings.ts: el catálogo vive en el código de la
+  // API, así que lo único que acorta este TTL es la ventana en que una zona
+  // recién desplegada se muestra con la etiqueta derivada del slug.
+  cacheLife("hours");
   cacheTag("catalogs");
   return new HttpClient({ baseUrl }).get<unknown>("/public/catalogs", {
     // Sin `include` la API devuelve todo; con él, omite las secciones no

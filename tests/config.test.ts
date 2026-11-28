@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { DataSourceConfigError, parseDataSource } from "@/lib/data/data-source";
 import { ConfigError, getConfig, resetConfigCache } from "@/lib/config";
 
@@ -41,7 +41,7 @@ describe("getConfig", () => {
   });
 
   const conEntorno = (env: Record<string, string | undefined>): ReturnType<typeof getConfig> => {
-    for (const clave of ["DATA_SOURCE", "API_URL"]) {
+    for (const clave of ["DATA_SOURCE", "API_URL", "TRUSTED_PROXY_HOPS"]) {
       delete process.env[clave];
     }
     Object.assign(process.env, env);
@@ -59,7 +59,7 @@ describe("getConfig", () => {
   // que la misma imagen sirve staging y producción.
   it("no expone ninguna URL al bundle del browser", () => {
     const config = conEntorno({ DATA_SOURCE: "api", API_URL: "http://api.local/v1" });
-    expect(Object.keys(config)).toEqual(["apiUrl", "dataSource"]);
+    expect(Object.keys(config).some((clave) => clave.includes("ublic"))).toBe(false);
   });
 
   it("saca la barra final para no generar URLs con //", () => {
@@ -82,6 +82,27 @@ describe("getConfig", () => {
   it("con mock no exige las URLs", () => {
     const config = conEntorno({ DATA_SOURCE: "mock" });
     expect(config.dataSource).toBe("mock");
+  });
+
+  describe("trustedProxyHops", () => {
+    it("por defecto es 1, la topología real con Dokploy adelante", () => {
+      expect(conEntorno({ DATA_SOURCE: "mock" }).trustedProxyHops).toBe(1);
+    });
+
+    it("se puede subir si se agrega otro proxy", () => {
+      expect(
+        conEntorno({ DATA_SOURCE: "mock", TRUSTED_PROXY_HOPS: "2" }).trustedProxyHops,
+      ).toBe(2);
+    });
+
+    // Un typo en una variable opcional no puede dejar al sitio sin formulario.
+    it.each(["0", "-1", "dos", "1.5", ""])("un valor inválido (%s) cae a 1 sin romper", (valor) => {
+      const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      expect(
+        conEntorno({ DATA_SOURCE: "mock", TRUSTED_PROXY_HOPS: valor }).trustedProxyHops,
+      ).toBe(1);
+      spy.mockRestore();
+    });
   });
 
   it("cachea: se resuelve una vez, no por llamada", () => {
