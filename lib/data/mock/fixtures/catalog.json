@@ -1,0 +1,1294 @@
+{
+  "provinces": [
+    {
+      "value": "mendoza",
+      "label": "Mendoza",
+      "departments": [
+        {
+          "value": "capital",
+          "label": "Capital",
+          "zones": [
+            {
+              "value": "1ra_seccion_parque_central",
+              "label": "1ra Sección Parque Central"
+            },
+            {
+              "value": "2da_seccion_barrio_civico",
+              "label": "2da Sección Barrio Cívico"
+            },
+            {
+              "value": "3ra_seccion_parque_ohiggins",
+              "label": "3ra Sección Parque O'Higgins"
+            },
+            {
+              "value": "4ta_seccion_area_fundacional",
+              "label": "4ta Sección Área Fundacional"
+            },
+            {
+              "value": "5ta_seccion_residencial_sur",
+              "label": "5ta Sección Residencial Sur"
+            },
+            {
+              "value": "6ta_seccion_residencial_norte",
+              "label": "6ta Sección Residencial Norte"
+            },
+            {
+              "value": "7ma_seccion_residencial_parque",
+              "label": "7ma Sección Residencial Parque"
+            },
+            {
+              "value": "8va_seccion_aeroparque",
+              "label": "8va Sección Aeroparque"
+            },
+            {
+              "value": "9na_seccion_parque_gral_san_martin",
+              "label": "9na Sección Parque Gral. San Martín"
+            },
+            {
+              "value": "10ma_seccion_residencial_los_cerros",
+              "label": "10ma Sección Residencial los Cerros"
+            },
+            {
+              "value": "11ra_seccion_san_agustin",
+              "label": "11ra Sección San Agustín"
+            },
+            {
+              "value": "12da_seccion_piedemonte",
+              "label": "12da Sección Piedemonte"
+            }
+          ]
+        },
+        {
+          "value": "general_alvear",
+          "label": "General Alvear",
+          "zones": [
+            {
+              "value": "bowen",
+              "label": "Bowen"
+            },
+            {
+              "value": "carmensa",
+              "label": "Carmensa"
+            },
+            {
+              "value": "colonia_alvear_oeste",
+              "label": "Colonia Alvear Oeste"
+            },
+            {
+              "value": "general_alvear_centro",
+              "label": "General Alvear Centro"
+            },
+            {
+              "value": "los_compartos",
+              "label": "Los Compartos"
+            },
+            {
+              "value": "san_pedro_del_atuel",
+              "label": "San Pedro del Atuel"
+            }
+          ]
+        },
+        {
+          "value": "godoy_cruz",
+          "label": "Godoy Cruz",
+          "zones": [
+            {
+              "value": "gobernador_benegas",
+              "label": "Gobernador Benegas"
+            },
+            {
+              "value": "godoy_cruz_centro",
+              "label": "Godoy Cruz Centro"
+            },
+            {
+              "value": "las_tortugas",
+              "label": "Las Tortugas"
+            },
+            {
+              "value": "presidente_sarmiento",
+              "label": "Presidente Sarmiento"
+            },
+            {
+              "value": "san_francisco_del_monte",
+              "label": "San Francisco del Monte"
+            },
+            {
+              "value": "trapiche",
+              "label": "Trapiche"
+            },
+            {
+              "value": "villa_del_parque",
+              "label": "Villa del Parque"
+            },
+            {
+              "value": "villa_hipodromo",
+              "label": "Villa Hipódromo"
+            },
+            {
+              "value": "villa_marini",
+              "label": "Villa Marini"
+            }
+          ]
+        },
+        {
+          "value": "guaymallen",
+          "label": "Guaymallén",
+          "zones": [
+            {
+              "value": "belgrano",
+              "label": "Belgrano"
+            },
+            {
+              "value": "buena_nueva",
+              "label": "Buena Nueva"
+            },
+            {
+              "value": "capilla_del_rosario",
+              "label": "Capilla del Rosario"
+            },
+            {
+              "value": "colonia_molina",
+              "label": "Colonia Molina"
+            },
+            {
+              "value": "colonia_segovia",
+              "label": "Colonia Segovia"
+            },
+            {
+              "value": "dorrego",
+              "label": "Dorrego"
+            },
+            {
+              "value": "el_bermejo",
+              "label": "El Bermejo"
+            },
+            {
+              "value": "el_sauce",
+              "label": "El Sauce"
+            },
+            {
+              "value": "guaymallen_villa_nueva",
+              "label": "Guaymallén Villa Nueva"
+            },
+            {
+              "value": "jesus_nazareno",
+              "label": "Jesús Nazareno"
+            },
+            {
+              "value": "kilometro_8",
+              "label": "Kilómetro 8"
+            },
+            {
+              "value": "kilometro_11",
+              "label": "Kilómetro 11"
+            },
+            {
+              "value": "la_primavera",
+              "label": "La Primavera"
+            },
+            {
+              "value": "las_canas",
+              "label": "Las Cañas"
+            },
+            {
+              "value": "los_corralitos",
+              "label": "Los Corralitos"
+            },
+            {
+              "value": "nueva_ciudad",
+              "label": "Nueva Ciudad"
+            },
+            {
+              "value": "pedro_molina",
+              "label": "Pedro Molina"
+            },
+            {
+              "value": "puente_de_hierro",
+              "label": "Puente de Hierro"
+            },
+            {
+              "value": "rodeo_de_la_cruz",
+              "label": "Rodeo de la Cruz"
+            },
+            {
+              "value": "san_francisco_del_monte_gm",
+              "label": "San Francisco del Monte Gm"
+            },
+            {
+              "value": "san_jose",
+              "label": "San José"
+            },
+            {
+              "value": "villa_nueva",
+              "label": "Villa Nueva"
+            }
+          ]
+        },
+        {
+          "value": "junin",
+          "label": "Junín",
+          "zones": [
+            {
+              "value": "algarrobo_grande",
+              "label": "Algarrobo Grande"
+            },
+            {
+              "value": "alto_verde_junin",
+              "label": "Alto Verde Junín"
+            },
+            {
+              "value": "ingeniero_giagnoni",
+              "label": "Ingeniero Giagnoni"
+            },
+            {
+              "value": "junin_centro",
+              "label": "Junín Centro"
+            },
+            {
+              "value": "la_colonia",
+              "label": "La Colonia"
+            },
+            {
+              "value": "los_barriales",
+              "label": "Los Barriales"
+            },
+            {
+              "value": "medrano_junin",
+              "label": "Medrano Junín"
+            },
+            {
+              "value": "philipps",
+              "label": "Philipps"
+            },
+            {
+              "value": "rodriguez_pena",
+              "label": "Rodríguez Peña"
+            }
+          ]
+        },
+        {
+          "value": "la_paz",
+          "label": "La Paz",
+          "zones": [
+            {
+              "value": "desaguadero",
+              "label": "Desaguadero"
+            },
+            {
+              "value": "la_paz_centro",
+              "label": "La Paz Centro"
+            },
+            {
+              "value": "villa_antigua",
+              "label": "Villa Antigua"
+            }
+          ]
+        },
+        {
+          "value": "las_heras",
+          "label": "Las Heras",
+          "zones": [
+            {
+              "value": "blanco_encalada",
+              "label": "Blanco Encalada"
+            },
+            {
+              "value": "el_algarrobal",
+              "label": "El Algarrobal"
+            },
+            {
+              "value": "el_borbollon",
+              "label": "El Borbollon"
+            },
+            {
+              "value": "el_challao",
+              "label": "El Challao"
+            },
+            {
+              "value": "el_pastal",
+              "label": "El Pastal"
+            },
+            {
+              "value": "el_plumerillo",
+              "label": "El Plumerillo"
+            },
+            {
+              "value": "el_resguardo",
+              "label": "El Resguardo"
+            },
+            {
+              "value": "jocoli",
+              "label": "Jocolí"
+            },
+            {
+              "value": "la_cieneguita",
+              "label": "La Cieneguita"
+            },
+            {
+              "value": "las_cuevas",
+              "label": "Las Cuevas"
+            },
+            {
+              "value": "las_heras_centro",
+              "label": "Las Heras Centro"
+            },
+            {
+              "value": "los_penitentes",
+              "label": "Los Penitentes"
+            },
+            {
+              "value": "panquehua",
+              "label": "Panquehua"
+            },
+            {
+              "value": "polvaredas",
+              "label": "Polvaredas"
+            },
+            {
+              "value": "puente_del_inca",
+              "label": "Puente del Inca"
+            },
+            {
+              "value": "punta_de_vacas",
+              "label": "Punta de Vacas"
+            },
+            {
+              "value": "uspallata",
+              "label": "Uspallata"
+            }
+          ]
+        },
+        {
+          "value": "lavalle",
+          "label": "Lavalle",
+          "zones": [
+            {
+              "value": "3_de_mayo",
+              "label": "3 de Mayo"
+            },
+            {
+              "value": "barrio_alto_del_olvido",
+              "label": "Barrio Alto del Olvido"
+            },
+            {
+              "value": "barrio_jocoli_ii",
+              "label": "Barrio Jocolí II"
+            },
+            {
+              "value": "barrio_la_palmera",
+              "label": "Barrio la Palmera"
+            },
+            {
+              "value": "barrio_la_pega",
+              "label": "Barrio la Pega"
+            },
+            {
+              "value": "barrio_lagunas_de_bartoluzzi",
+              "label": "Barrio Lagunas de Bartoluzzi"
+            },
+            {
+              "value": "barrio_los_jarilleros",
+              "label": "Barrio los Jarilleros"
+            },
+            {
+              "value": "barrio_los_olivos",
+              "label": "Barrio los Olivos"
+            },
+            {
+              "value": "barrio_virgen_del_rosario",
+              "label": "Barrio Virgen del Rosario"
+            },
+            {
+              "value": "costa_de_araujo",
+              "label": "Costa de Araujo"
+            },
+            {
+              "value": "el_paramillo",
+              "label": "El Paramillo"
+            },
+            {
+              "value": "el_vergel",
+              "label": "El Vergel"
+            },
+            {
+              "value": "ingeniero_gustavo_andre",
+              "label": "Ingeniero Gustavo Andre"
+            },
+            {
+              "value": "jocoli_lavalle",
+              "label": "Jocolí Lavalle"
+            },
+            {
+              "value": "jocoli_viejo",
+              "label": "Jocolí Viejo"
+            },
+            {
+              "value": "las_violetas",
+              "label": "Las Violetas"
+            },
+            {
+              "value": "villa_tulumaya",
+              "label": "Villa Tulumaya"
+            }
+          ]
+        },
+        {
+          "value": "lujan_de_cuyo",
+          "label": "Luján de Cuyo",
+          "zones": [
+            {
+              "value": "agrelo",
+              "label": "Agrelo"
+            },
+            {
+              "value": "barrio_perdriel_iv",
+              "label": "Barrio Perdriel IV"
+            },
+            {
+              "value": "cacheuta",
+              "label": "Cacheuta"
+            },
+            {
+              "value": "carrodilla",
+              "label": "Carrodilla"
+            },
+            {
+              "value": "chacras_de_coria",
+              "label": "Chacras de Coria"
+            },
+            {
+              "value": "costa_flores",
+              "label": "Costa Flores"
+            },
+            {
+              "value": "el_carrizal",
+              "label": "El Carrizal"
+            },
+            {
+              "value": "el_salto",
+              "label": "El Salto"
+            },
+            {
+              "value": "la_puntilla",
+              "label": "La Puntilla"
+            },
+            {
+              "value": "las_compuertas",
+              "label": "Las Compuertas"
+            },
+            {
+              "value": "las_vegas",
+              "label": "Las Vegas"
+            },
+            {
+              "value": "lujan_de_cuyo_centro",
+              "label": "Luján de Cuyo Centro"
+            },
+            {
+              "value": "mayor_drummond",
+              "label": "Mayor Drummond"
+            },
+            {
+              "value": "perdriel",
+              "label": "Perdriel"
+            },
+            {
+              "value": "potrerillos",
+              "label": "Potrerillos"
+            },
+            {
+              "value": "ugarteche",
+              "label": "Ugarteche"
+            },
+            {
+              "value": "vertientes_del_pedemonte",
+              "label": "Vertientes del Pedemonte"
+            },
+            {
+              "value": "vistalba",
+              "label": "Vistalba"
+            }
+          ]
+        },
+        {
+          "value": "maipu",
+          "label": "Maipú",
+          "zones": [
+            {
+              "value": "barrancas",
+              "label": "Barrancas"
+            },
+            {
+              "value": "barrio_jesus_de_nazaret",
+              "label": "Barrio Jesús de Nazaret"
+            },
+            {
+              "value": "coquimbito",
+              "label": "Coquimbito"
+            },
+            {
+              "value": "cruz_de_piedra",
+              "label": "Cruz de Piedra"
+            },
+            {
+              "value": "el_pedregal",
+              "label": "El Pedregal"
+            },
+            {
+              "value": "fray_luis_beltran",
+              "label": "Fray Luis Beltran"
+            },
+            {
+              "value": "general_gutierrez",
+              "label": "General Gutierrez"
+            },
+            {
+              "value": "general_ortega",
+              "label": "General Ortega"
+            },
+            {
+              "value": "lunlunta",
+              "label": "Lunlunta"
+            },
+            {
+              "value": "luzuriaga",
+              "label": "Luzuriaga"
+            },
+            {
+              "value": "maipu_centro",
+              "label": "Maipú Centro"
+            },
+            {
+              "value": "rodeo_del_medio",
+              "label": "Rodeo del Medio"
+            },
+            {
+              "value": "russell",
+              "label": "Russell"
+            },
+            {
+              "value": "san_roque",
+              "label": "San Roque"
+            },
+            {
+              "value": "villa_teresa",
+              "label": "Villa Teresa"
+            }
+          ]
+        },
+        {
+          "value": "malargue",
+          "label": "Malargüe",
+          "zones": [
+            {
+              "value": "agua_escondida",
+              "label": "Agua Escondida"
+            },
+            {
+              "value": "las_lenas",
+              "label": "Las Leñas"
+            },
+            {
+              "value": "malargue_centro",
+              "label": "Malargüe Centro"
+            },
+            {
+              "value": "rio_grande",
+              "label": "Río Grande"
+            }
+          ]
+        },
+        {
+          "value": "rivadavia",
+          "label": "Rivadavia",
+          "zones": [
+            {
+              "value": "andrade",
+              "label": "Andrade"
+            },
+            {
+              "value": "barrio_coop_los_campamentos",
+              "label": "Barrio Coop. los Campamentos"
+            },
+            {
+              "value": "barrio_rivadavia",
+              "label": "Barrio Rivadavia"
+            },
+            {
+              "value": "el_mirador",
+              "label": "El Mirador"
+            },
+            {
+              "value": "la_central",
+              "label": "La Central"
+            },
+            {
+              "value": "la_esperanza",
+              "label": "La Esperanza"
+            },
+            {
+              "value": "la_florida",
+              "label": "La Florida"
+            },
+            {
+              "value": "la_libertad",
+              "label": "La Libertad"
+            },
+            {
+              "value": "los_arboles",
+              "label": "Los Arboles"
+            },
+            {
+              "value": "los_campamentos",
+              "label": "Los Campamentos"
+            },
+            {
+              "value": "medrano",
+              "label": "Medrano"
+            },
+            {
+              "value": "mundo_nuevo",
+              "label": "Mundo Nuevo"
+            },
+            {
+              "value": "reduccion_de_abajo",
+              "label": "Reducción de Abajo"
+            },
+            {
+              "value": "rivadavia_centro",
+              "label": "Rivadavia Centro"
+            },
+            {
+              "value": "santa_maria_de_oro",
+              "label": "Santa María de Oro"
+            }
+          ]
+        },
+        {
+          "value": "san_carlos",
+          "label": "San Carlos",
+          "zones": [
+            {
+              "value": "barrio_carrasco",
+              "label": "Barrio Carrasco"
+            },
+            {
+              "value": "barrio_el_cepillo",
+              "label": "Barrio el Cepillo"
+            },
+            {
+              "value": "chilecito",
+              "label": "Chilecito"
+            },
+            {
+              "value": "eugenio_bustos",
+              "label": "Eugenio Bustos"
+            },
+            {
+              "value": "la_consulta",
+              "label": "La Consulta"
+            },
+            {
+              "value": "pareditas",
+              "label": "Pareditas"
+            },
+            {
+              "value": "san_carlos_centro",
+              "label": "San Carlos Centro"
+            }
+          ]
+        },
+        {
+          "value": "san_martin",
+          "label": "San Martín",
+          "zones": [
+            {
+              "value": "alto_verde",
+              "label": "Alto Verde"
+            },
+            {
+              "value": "barrio_emanuel",
+              "label": "Barrio Emanuel"
+            },
+            {
+              "value": "barrio_la_estacion",
+              "label": "Barrio la Estación"
+            },
+            {
+              "value": "barrio_los_charabones",
+              "label": "Barrio los Charabones"
+            },
+            {
+              "value": "barrio_nstra_sra_de_fatima",
+              "label": "Barrio Ntra. Sra. de Fátima"
+            },
+            {
+              "value": "chapanay",
+              "label": "Chapanay"
+            },
+            {
+              "value": "chivilcoy",
+              "label": "Chivilcoy"
+            },
+            {
+              "value": "el_central",
+              "label": "El Central"
+            },
+            {
+              "value": "el_divisadero",
+              "label": "El Divisadero"
+            },
+            {
+              "value": "el_espino",
+              "label": "El Espino"
+            },
+            {
+              "value": "el_ramblon",
+              "label": "El Ramblon"
+            },
+            {
+              "value": "montecaseros",
+              "label": "Montecaseros"
+            },
+            {
+              "value": "nueva_california",
+              "label": "Nueva California"
+            },
+            {
+              "value": "palmira",
+              "label": "Palmira"
+            },
+            {
+              "value": "san_martin_centro",
+              "label": "San Martín Centro"
+            },
+            {
+              "value": "tres_portenas",
+              "label": "Tres Porteñas"
+            }
+          ]
+        },
+        {
+          "value": "san_rafael",
+          "label": "San Rafael",
+          "zones": [
+            {
+              "value": "25_de_mayo",
+              "label": "25 de Mayo"
+            },
+            {
+              "value": "barrio_campos_el_toledano",
+              "label": "Barrio Campos el Toledano"
+            },
+            {
+              "value": "barrio_el_nevado",
+              "label": "Barrio el Nevado"
+            },
+            {
+              "value": "barrio_empleados_de_comercio",
+              "label": "Barrio Empleados de Comercio"
+            },
+            {
+              "value": "barrio_intendencia",
+              "label": "Barrio Intendencia"
+            },
+            {
+              "value": "capitan_montoya",
+              "label": "Capitan Montoya"
+            },
+            {
+              "value": "cuadro_benegas",
+              "label": "Cuadro Benegas"
+            },
+            {
+              "value": "el_nihuil",
+              "label": "El Nihuil"
+            },
+            {
+              "value": "el_sosneado",
+              "label": "El Sosneado"
+            },
+            {
+              "value": "el_tropezon",
+              "label": "El Tropezon"
+            },
+            {
+              "value": "goudge",
+              "label": "Goudge"
+            },
+            {
+              "value": "jaime_prats",
+              "label": "Jaime Prats"
+            },
+            {
+              "value": "la_llave_nueva",
+              "label": "La Llave Nueva"
+            },
+            {
+              "value": "las_malvinas",
+              "label": "Las Malvinas"
+            },
+            {
+              "value": "los_reyunos",
+              "label": "Los Reyunos"
+            },
+            {
+              "value": "monte_coman",
+              "label": "Monte Coman"
+            },
+            {
+              "value": "pobre_diablo",
+              "label": "Pobre Diablo"
+            },
+            {
+              "value": "punta_del_agua",
+              "label": "Punta del Agua"
+            },
+            {
+              "value": "rama_caida",
+              "label": "Rama Caida"
+            },
+            {
+              "value": "real_del_padre",
+              "label": "Real del Padre"
+            },
+            {
+              "value": "salto_de_las_rosas",
+              "label": "Salto de las Rosas"
+            },
+            {
+              "value": "san_rafael_centro",
+              "label": "San Rafael Centro"
+            },
+            {
+              "value": "villa_atuel",
+              "label": "Villa Atuel"
+            }
+          ]
+        },
+        {
+          "value": "santa_rosa",
+          "label": "Santa Rosa",
+          "zones": [
+            {
+              "value": "barrio_12_de_octubre",
+              "label": "Barrio 12 de Octubre"
+            },
+            {
+              "value": "barrio_maria_auxiliadora",
+              "label": "Barrio María Auxiliadora"
+            },
+            {
+              "value": "barrio_molina_cabrera",
+              "label": "Barrio Molina Cabrera"
+            },
+            {
+              "value": "la_dormida",
+              "label": "La Dormida"
+            },
+            {
+              "value": "las_catitas",
+              "label": "Las Catitas"
+            },
+            {
+              "value": "santa_rosa_centro",
+              "label": "Santa Rosa Centro"
+            }
+          ]
+        },
+        {
+          "value": "tunuyan",
+          "label": "Tunuyán",
+          "zones": [
+            {
+              "value": "barrio_san_cayetano",
+              "label": "Barrio San Cayetano"
+            },
+            {
+              "value": "campo_los_andes",
+              "label": "Campo los Andes"
+            },
+            {
+              "value": "colonia_las_rosas",
+              "label": "Colonia las Rosas"
+            },
+            {
+              "value": "el_manzano",
+              "label": "El Manzano"
+            },
+            {
+              "value": "los_sauces",
+              "label": "Los Sauces"
+            },
+            {
+              "value": "tunuyan_centro",
+              "label": "Tunuyán Centro"
+            },
+            {
+              "value": "vista_flores",
+              "label": "Vista Flores"
+            }
+          ]
+        },
+        {
+          "value": "tupungato",
+          "label": "Tupungato",
+          "zones": [
+            {
+              "value": "anchoris",
+              "label": "Anchoris"
+            },
+            {
+              "value": "barrio_belgrano_norte",
+              "label": "Barrio Belgrano Norte"
+            },
+            {
+              "value": "cordon_del_plata",
+              "label": "Cordón del Plata"
+            },
+            {
+              "value": "el_peral",
+              "label": "El Peral"
+            },
+            {
+              "value": "el_zampal",
+              "label": "El Zampal"
+            },
+            {
+              "value": "la_arboleda",
+              "label": "La Arboleda"
+            },
+            {
+              "value": "san_jose_tupungato",
+              "label": "San José Tupungato"
+            },
+            {
+              "value": "tupungato_centro",
+              "label": "Tupungato Centro"
+            },
+            {
+              "value": "villa_bastias",
+              "label": "Villa Bastias"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "property_types": [
+    {
+      "value": "house",
+      "label": "Casa"
+    },
+    {
+      "value": "garage",
+      "label": "Cochera"
+    },
+    {
+      "value": "apartment",
+      "label": "Departamento"
+    },
+    {
+      "value": "duplex",
+      "label": "Dúplex"
+    },
+    {
+      "value": "service-station",
+      "label": "Estación de servicio"
+    },
+    {
+      "value": "farm",
+      "label": "Finca"
+    },
+    {
+      "value": "goodwill",
+      "label": "Fondo de comercio"
+    },
+    {
+      "value": "shed",
+      "label": "Galpón"
+    },
+    {
+      "value": "commercial",
+      "label": "Local comercial"
+    },
+    {
+      "value": "lot",
+      "label": "Lote"
+    },
+    {
+      "value": "office",
+      "label": "Oficina"
+    },
+    {
+      "value": "ph",
+      "label": "PH"
+    },
+    {
+      "value": "parking-lot",
+      "label": "Playa de estacionamiento"
+    },
+    {
+      "value": "semi-floor",
+      "label": "Semipiso"
+    },
+    {
+      "value": "land",
+      "label": "Terreno"
+    },
+    {
+      "value": "triplex",
+      "label": "Tríplex"
+    }
+  ],
+  "conditions": [
+    {
+      "value": "rent",
+      "label": "Alquiler"
+    },
+    {
+      "value": "temporary_rent",
+      "label": "Alquiler temporario"
+    },
+    {
+      "value": "exchange",
+      "label": "Permuta"
+    },
+    {
+      "value": "sale",
+      "label": "Venta"
+    }
+  ],
+  "currencies": [
+    {
+      "value": "USD",
+      "label": "Dólares"
+    },
+    {
+      "value": "ARS",
+      "label": "Pesos"
+    }
+  ],
+  "amenities": [
+    {
+      "value": "air_conditioning",
+      "label": "Aire Acondicionado",
+      "section": "utilities"
+    },
+    {
+      "value": "alarm",
+      "label": "Alarma",
+      "section": "security"
+    },
+    {
+      "value": "attic",
+      "label": "Altillo",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "elevator",
+      "label": "Ascensor",
+      "section": "utilities"
+    },
+    {
+      "value": "balcony",
+      "label": "Balcón",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "boiler",
+      "label": "Caldera",
+      "section": "utilities"
+    },
+    {
+      "value": "heating",
+      "label": "Calefacción",
+      "section": "utilities"
+    },
+    {
+      "value": "chimney",
+      "label": "Chimenea",
+      "section": "amenities_comfort"
+    },
+    {
+      "value": "cistern",
+      "label": "Cisterna",
+      "section": "utilities"
+    },
+    {
+      "value": "kitchen",
+      "label": "Cocina",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "dining_room",
+      "label": "Comedor",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "cameras",
+      "label": "Cámaras",
+      "section": "security"
+    },
+    {
+      "value": "service_quarters",
+      "label": "Dependencia de Servicio",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "breakfast_nook",
+      "label": "Desayunador",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "suite_bedroom",
+      "label": "Dormitorio en Suite",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "solar_energy",
+      "label": "Energía Solar",
+      "section": "utilities"
+    },
+    {
+      "value": "visitor_parking",
+      "label": "Estacionamiento para Visitantes",
+      "section": "common_areas"
+    },
+    {
+      "value": "study",
+      "label": "Estudio",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "gym",
+      "label": "Gimnasio",
+      "section": "amenities_comfort"
+    },
+    {
+      "value": "internet",
+      "label": "Internet/WiFi",
+      "section": "utilities"
+    },
+    {
+      "value": "jacuzzi",
+      "label": "Jacuzzi",
+      "section": "amenities_comfort"
+    },
+    {
+      "value": "garden",
+      "label": "Jardín",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "laundry_room",
+      "label": "Lavadero",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "living",
+      "label": "Living",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "lobby",
+      "label": "Lobby",
+      "section": "common_areas"
+    },
+    {
+      "value": "grill",
+      "label": "Parrilla",
+      "section": "amenities_comfort"
+    },
+    {
+      "value": "swimming_pool",
+      "label": "Piscina",
+      "section": "amenities_comfort"
+    },
+    {
+      "value": "closets",
+      "label": "Placards",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "playroom",
+      "label": "Playroom",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "concierge",
+      "label": "Portería",
+      "section": "security"
+    },
+    {
+      "value": "quincho",
+      "label": "Quincho",
+      "section": "amenities_comfort"
+    },
+    {
+      "value": "wheelchair_ramp",
+      "label": "Rampa para silla de ruedas",
+      "section": "utilities"
+    },
+    {
+      "value": "meeting_room",
+      "label": "Sala de Reuniones",
+      "section": "common_areas"
+    },
+    {
+      "value": "event_hall",
+      "label": "Salón de Eventos",
+      "section": "common_areas"
+    },
+    {
+      "value": "sauna",
+      "label": "Sauna",
+      "section": "amenities_comfort"
+    },
+    {
+      "value": "has_security",
+      "label": "Seguridad",
+      "section": "security"
+    },
+    {
+      "value": "cable_tv",
+      "label": "TV por Cable",
+      "section": "utilities"
+    },
+    {
+      "value": "phone",
+      "label": "Teléfono",
+      "section": "utilities"
+    },
+    {
+      "value": "terrace",
+      "label": "Terraza",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "toilet",
+      "label": "Toilette",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "dressing_room",
+      "label": "Vestidor",
+      "section": "amenities_rooms"
+    },
+    {
+      "value": "green_area",
+      "label": "Área Verde",
+      "section": "common_areas"
+    },
+    {
+      "value": "home_theater",
+      "label": "Área de Cine",
+      "section": "common_areas"
+    },
+    {
+      "value": "playground",
+      "label": "Área de Juegos Infantiles",
+      "section": "common_areas"
+    }
+  ]
+}

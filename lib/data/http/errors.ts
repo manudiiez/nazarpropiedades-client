@@ -31,7 +31,16 @@ export class ApiError extends Error {
     message: string;
     requestId: string | null;
   }) {
-    super(options.message);
+    // El request_id se mete en el MENSAJE, no solo en la propiedad: al cruzar
+    // una frontera de `use cache` las propiedades propias del error se pierden
+    // y el mensaje sobrevive. Es el único dato que sirve para que la sesión que
+    // mantiene la API rastree el pedido, así que vale la redundancia.
+    // Este mensaje es para el log, nunca se le muestra al visitante.
+    super(
+      options.requestId === null
+        ? options.message
+        : `${options.message} [request_id: ${options.requestId}]`,
+    );
     this.name = new.target.name;
     this.code = options.code;
     this.status = options.status;
