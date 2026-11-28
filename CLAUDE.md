@@ -118,6 +118,16 @@ La ficha. Es la página que indexa Google y la que se comparte, así que las dec
 - **Los nombres de las secciones los pone el front** (`lib/format/secciones.ts`), porque la API manda la clave (`dimensions`, `amenities_comfort`) y no hay endpoint que devuelva su nombre. Es la única excepción a "las etiquetas vienen de la API", y una sección desconocida se degrada con `humanize`. El orden de las secciones es el de la respuesta: la API ya ordena por prioridad.
 - Los tres bloques de atributos (`attributes`, `amenities`, `nearbyZones`) **pueden venir vacíos** si no hay strategy para ese par (tipo, condición): cada bloque decide no dibujarse. Las relacionadas van en su propio `<Suspense>` y degradan a nada.
 
+### Home
+
+`app/page.tsx`: buscador rápido, accesos a las búsquedas más comunes, destacadas y el formulario de consulta general.
+
+- **Los bloques con datos se resuelven por request (`await connection()` antes de leer), aunque las lecturas estén cacheadas.** Parece contradecir que la home sea cacheable, y es por el Dockerfile: la imagen se construye **sin `DATA_SOURCE`** (ninguna variable de la API es build-arg, para que la misma imagen sirva staging y producción), así que en el build las lecturas fallan y degradan a vacío. Si los bloques se prerenderizaran, la cáscara quedaría horneada con cero destacadas y sin conteos **y así se serviría siempre**. Verificado: construyendo sin `DATA_SOURCE` y levantando con `DATA_SOURCE=mock`, la home servía la cáscara vacía en todos los requests. No cuesta pedidos extra: el caché sigue en los repositorios, que es lo que protege del rate limit.
+- **Las destacadas salen de `getFeaturedListings()`**, no de `getLatestListings()`, aunque hoy devuelvan lo mismo: cuando la API tenga `featured` cambia esa función y la home no se toca. Usa `attemptOr`, así que una falla degrada a `[]` y la home se muestra sin el bloque.
+- **Los accesos rápidos son links con los filtros en la URL** (`urlDelListado`), no botones: funcionan sin JavaScript, se comparten y los indexa Google. Los conteos salen de facets; si la lectura falla, van sin conteo.
+- Las tres operaciones se ofrecen siempre, incluso con `count: 0` —esconder "Alquiler" hace parecer que la inmobiliaria no alquila—, pero un **departamento** con 0 no se ofrece: ahí el 0 no informa nada y el link promete una lista vacía.
+- El `<Suspense>` de las destacadas va con `fallback={null}`: el bloque puede terminar vacío, y sin JavaScript un "Cargando…" se queda pegado donde no va a aparecer nada.
+
 ### Formulario de consulta
 
 `components/formulario-de-consulta.tsx` usa la Server Action de `lib/actions/consultas.ts`. Dos usos con el mismo componente: la consulta general y la de una propiedad (`fuente="propiedad_individual"` + `listingId`, que la API **exige** en ese caso).
