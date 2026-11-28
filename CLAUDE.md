@@ -104,6 +104,19 @@ Precios, superficies, atributos y fechas se formatean en `lib/format`, con funci
 - **Tres pantallas vacías distintas, y confundirlas miente**: una falla de datos (`FallaDeDatos`, con reintentar), cero resultados (`SinResultados`, con los filtros aplicados para saber qué soltar) y una página más allá del final (`PaginaFueraDeRango`, porque sí hay resultados, están en la página 1).
 - **La tarjeta usa `coverPhoto.url`, no `thumbnailUrl`**: la miniatura mide 400x300 y `w=400` no es un ancho permitido. `coverPhoto` puede ser `null` con la propiedad publicada (el worker de imágenes todavía no corrió): va un placeholder.
 
+### Detalle `/propiedad/[id]/[[...slug]]`
+
+La ficha. Es la página que indexa Google y la que se comparte, así que las decisiones son distintas a las del listado.
+
+- **La URL canónica es `/propiedad/{id}/{slug}` y el slug es decorativo.** La API no tiene slug: lo único que identifica la propiedad es el id. El slug se arma en `lib/format/propiedad.ts` a partir del **título compuesto** (tipo + operación + zona) y **no** de `title`, que el CRM edita: si dependiera de `title`, cambiarlo movería la URL de una propiedad ya compartida. El segmento es un catch-all **opcional** para que `/propiedad/{id}` resuelva —los `sibling_listings` llegan sin tipo ni ubicación y no pueden armar el slug— y redirija al canónico.
+- **El contenido va en un `<Suspense>`.** Sin boundary, el HTML sale con la cáscara vacía y la ficha entera se renderiza en el cliente desde el payload de RSC (verificado: 59 KB de HTML con boundary, 13 KB sin él). En esta página eso no es un detalle.
+- **`notFound()` no devuelve un 404 de HTTP.** Con `cacheComponents` la respuesta arranca con 200 en cuanto sale la cáscara; lo que mantiene la URL fuera del índice es el `<meta name="robots" content="noindex">` que Next agrega en el stream. Un 404 duro exigiría chequear en Proxy, y ahí no se sabe si el id existe sin pedirle la propiedad a la API en cada request. Mismo mecanismo para el redirect del slug, que viaja en el stream.
+- **`showMap` manda sobre las coordenadas**: con `showMap: false` no se dibuja mapa aunque haya lat/lng. Y con `mode` distinto de `exact` **no se publican las coordenadas ni un link al punto**: el propietario pidió que se muestre el área, y filtrar el punto por la ventana del mapa es lo mismo que publicarlo. `range` es el radio en metros.
+- **Los booleanos del JSONB llegan capitalizados como en Python** (`"True"`, no `"true"`): sin eso la ficha mostraba "Piscina: True". Se convierten en el mapper.
+- **Algunos atributos traen el valor del enum en crudo** (`garage_type: "garage_doble"`). La etiqueta y el sufijo sí vienen listos, pero el valor no tiene endpoint que lo traduzca: `lib/format/atributos.ts` normaliza solo lo que tiene pinta de slug (todo minúscula, sin espacios) para no tocar lo que el CRM escribió a mano. Lo correcto es que la API mande la etiqueta del valor.
+- **Los nombres de las secciones los pone el front** (`lib/format/secciones.ts`), porque la API manda la clave (`dimensions`, `amenities_comfort`) y no hay endpoint que devuelva su nombre. Es la única excepción a "las etiquetas vienen de la API", y una sección desconocida se degrada con `humanize`. El orden de las secciones es el de la respuesta: la API ya ordena por prioridad.
+- Los tres bloques de atributos (`attributes`, `amenities`, `nearbyZones`) **pueden venir vacíos** si no hay strategy para ese par (tipo, condición): cada bloque decide no dibujarse. Las relacionadas van en su propio `<Suspense>` y degradan a nada.
+
 ### Caché
 
 `use cache` va en las funciones de los repositorios, **no en `HttpClient`**: los argumentos de una función cacheada tienen que ser serializables, y ni una instancia de clase ni un `AbortSignal` lo son.

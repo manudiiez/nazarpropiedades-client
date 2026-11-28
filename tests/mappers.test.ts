@@ -70,6 +70,23 @@ describe("mapListing contra el detalle real", () => {
     expect(superficie?.label).toBeTruthy();
   });
 
+  it("los booleanos del JSONB llegan capitalizados como en Python", () => {
+    // Las amenities y las zonas cercanas vienen con "True"/"False", no con
+    // "true"/"false": sin convertirlos, la ficha muestra "Piscina: True".
+    const conAmenity = mapListing(
+      {
+        ...(DETALLE as Record<string, unknown>),
+        amenities: [
+          { key: "swimming_pool", value: "True", label: "Piscina", suffix: null, section: null },
+          { key: "elevator", value: "False", label: "Ascensor", suffix: null, section: null },
+        ],
+      },
+      "x",
+      LABELS,
+    );
+    expect(conAmenity.amenities.map((a) => a.value)).toEqual([true, false]);
+  });
+
   it("respeta showMap y las coordenadas", () => {
     expect(typeof detalle.map.showMap).toBe("boolean");
   });

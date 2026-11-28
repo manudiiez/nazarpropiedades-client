@@ -98,8 +98,13 @@ function mapPhotos(raw: unknown, path: string): Photo[] {
 function attributeValue(raw: unknown, path: string): string | number | boolean {
   if (typeof raw === "number" || typeof raw === "boolean") return raw;
   const text = asString(raw, path);
-  if (text === "true") return true;
-  if (text === "false") return false;
+  // El JSONB guarda lo que mandó el CRM, y los booleanos llegan con la
+  // capitalización de Python: las amenities y las zonas cercanas vienen como
+  // "True"/"False", no como "true"/"false". Sin esto, la ficha muestra
+  // "Piscina: True" en vez de "Piscina: Sí".
+  const booleano = text.trim().toLowerCase();
+  if (booleano === "true") return true;
+  if (booleano === "false") return false;
   const parsed = Number(text);
   return text.trim() !== "" && Number.isFinite(parsed) ? parsed : text;
 }
