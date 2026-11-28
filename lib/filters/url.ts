@@ -128,7 +128,7 @@ const ORDENES: readonly [ListingSort, string][] = [
 ];
 
 // El orden por defecto no se serializa: una sola URL por contenido.
-const ORDEN_POR_DEFECTO: ListingSort = "reciente";
+export const ORDEN_POR_DEFECTO: ListingSort = "reciente";
 
 function codificar<T>(pares: readonly [T, string][]): (valor: T) => string {
   const mapa = new Map(pares);
@@ -152,6 +152,20 @@ const cocherasAUrl = codificar(COCHERAS);
 const cocherasDesdeUrl = decodificar(COCHERAS);
 const ordenAUrl = codificar(ORDENES);
 const ordenDesdeUrl = decodificar(ORDENES);
+
+// Los valores tal como viajan en la URL, expuestos para que los controles del
+// filtro pongan en su `value` exactamente lo que esta misma capa sabe parsear.
+// Sin esto, el `<input>` de "5 o más" tendría su propia copia del vocabulario y
+// la ida y vuelta se rompería con un typo que nadie ve hasta que el filtro no
+// filtra.
+export const EN_URL = {
+  operacion: operacionAUrl,
+  moneda: monedaAUrl,
+  antiguedad: antiguedadAUrl,
+  ambientes: ambientesAUrl,
+  cocheras: cocherasAUrl,
+  orden: ordenAUrl,
+} as const;
 
 function crudos(params: SearchParamsInput, param: string): string[] {
   if (params instanceof URLSearchParams) return params.getAll(param);
@@ -412,4 +426,15 @@ export function searchParamsDesdeFiltros(
   if (Number.isFinite(numero) && numero > 1) salida.append(PARAMS.pagina, String(numero));
 
   return salida;
+}
+
+// La ruta del listado y el armado del link, en un solo lugar: el paginador, los
+// chips de filtros y el redirect del formulario tienen que producir exactamente
+// la misma URL para la misma lista, y tres plantillas de string distintas no
+// coinciden por mucho tiempo.
+export const RUTA_DEL_LISTADO = "/propiedades";
+
+export function urlDelListado(filtros: ListingFilters, pagina = 1): string {
+  const query = searchParamsDesdeFiltros(filtros, pagina).toString();
+  return query === "" ? RUTA_DEL_LISTADO : `${RUTA_DEL_LISTADO}?${query}`;
 }

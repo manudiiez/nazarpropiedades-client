@@ -91,6 +91,19 @@ Precios, superficies, atributos y fechas se formatean en `lib/format`, con funci
 - **El tamaño de página no viaja en la URL.** `paginaDesdeSearchParams` devuelve siempre `limit: DEFAULT_PAGE_SIZE`: exponerlo sería `?limit=100` gratis y la misma lista en N URLs.
 - `searchParams` es una API dinámica: **no se lee dentro de un scope con `use cache`**. La página la resuelve y le pasa el objeto a estas funciones, que son puras.
 
+### Listado `/propiedades`
+
+`app/propiedades/page.tsx` es la primera ruta que consume la capa de datos. `app/propiedades/consulta.ts` traduce la URL una sola vez (`resolverConsulta`) y los componentes de `components/propiedades/` solo renderizan.
+
+- **La página no hace `await` de nada.** La cáscara se prerenderiza estática y todo lo que depende de `searchParams` va en `<Suspense>`; si no, el build falla con `blocking-prerender-dynamic`. Son **dos boundaries**: los filtros salen de lecturas cacheadas y llegan antes que los resultados. `resolverConsulta` se llama una vez y la **misma promesa** se le pasa a las dos secciones, así el parseo y las lecturas no se hacen dos veces.
+- **Las opciones de los combos salen de `getFacets()`**; el catálogo es el respaldo cuando facets falla (filtro sin conteos antes que sin filtro) y la **única** fuente de las amenities, que facets no trae. Las opciones con `count: 0` van deshabilitadas **con** su conteo; si el valor venía marcado en la URL, no se deshabilita: hay que poder destildar el filtro que dejó la lista en cero.
+- **El submit es una Server Action (`lib/actions/filtros.ts`), no un `<form method="get">`.** Un form GET manda también los campos vacíos, así que buscar sin tocar nada deja `?direccion=&precio_min=&…`: dos URLs para la misma lista, y la URL es parte del producto. La acción hace FormData → filtros → URL canónica → `redirect`. Funciona sin JavaScript (POST + 303).
+- **Ubicación progresiva**: provincia → departamentos de esa provincia → zonas de los departamentos elegidos. Las 215 zonas juntas no son un filtro, y cada submit trae el nivel siguiente, así que tampoco necesita JavaScript.
+- **Ordenar por precio fuerza una moneda** (`lib/filters/orden.ts`), elegida entre las que tienen publicaciones según `facets.priceRange`. La moneda forzada **viaja en la URL** y se avisa al lado del control: así el link compartido reproduce la lista que se vio.
+- **Las etiquetas de los controles que el front define** (antigüedad, "5 o más", orden, secciones de amenities) están en `lib/filters/opciones.ts`, y su `value` se calcula con los mismos codificadores que `searchParamsDesdeFiltros` (`EN_URL`). Un diccionario aparte en el componente se desincroniza y el filtro se dibuja bien pero no filtra.
+- **Tres pantallas vacías distintas, y confundirlas miente**: una falla de datos (`FallaDeDatos`, con reintentar), cero resultados (`SinResultados`, con los filtros aplicados para saber qué soltar) y una página más allá del final (`PaginaFueraDeRango`, porque sí hay resultados, están en la página 1).
+- **La tarjeta usa `coverPhoto.url`, no `thumbnailUrl`**: la miniatura mide 400x300 y `w=400` no es un ancho permitido. `coverPhoto` puede ser `null` con la propiedad publicada (el worker de imágenes todavía no corrió): va un placeholder.
+
 ### Caché
 
 `use cache` va en las funciones de los repositorios, **no en `HttpClient`**: los argumentos de una función cacheada tienen que ser serializables, y ni una instancia de clase ni un `AbortSignal` lo son.
