@@ -94,6 +94,15 @@ export function validateInquiry(input: NewInquiry): void {
 
   if (input.listingId !== undefined && (!Number.isInteger(input.listingId) || input.listingId <= 0)) {
     details.push({ field: "listingId", message: "La propiedad asociada no es válida." });
+  } else if (input.fuente === "propiedad_individual" && input.listingId === undefined) {
+    // Regla de la API, descubierta probándola: una consulta por una propiedad
+    // concreta sin `listing_id` devuelve 400. No estaba en el contrato que me
+    // pasaron, y sin esto el visitante llena el formulario y recibe un error
+    // del servidor en vez de ver el campo marcado.
+    details.push({
+      field: "listingId",
+      message: "Falta la propiedad sobre la que estás consultando.",
+    });
   }
 
   if (details.length > 0) throw new InvalidInquiryError(details);

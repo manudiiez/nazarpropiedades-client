@@ -11,6 +11,7 @@ import type {
 } from "@/lib/domain";
 import { DEFAULT_PAGE_SIZE } from "@/lib/domain";
 import { catalogsRepository, inquiriesRepository, listingsRepository } from "./index";
+import type { ContextoPedido } from "./inquiries-repository";
 import { attempt, attemptOr, type DataResult } from "./failures";
 import { MappingError } from "./http/parse";
 import { validateFilters } from "./validate-filters";
@@ -84,11 +85,14 @@ export async function getFacets(): Promise<DataResult<Facets>> {
 
 // El formulario necesita saber por qué falló para marcar el campo, así que
 // devuelve DataResult y el llamador decide.
-export async function createInquiry(input: NewInquiry): Promise<DataResult<Inquiry>> {
+export async function createInquiry(
+  input: NewInquiry,
+  contexto?: ContextoPedido,
+): Promise<DataResult<Inquiry>> {
   return attempt("createInquiry", () => {
     // Antes de la red: la API acepta campos vacíos y devuelve 201, así que si
     // no se valida acá el CRM recibe consultas en blanco.
     validateInquiry(input);
-    return inquiriesRepository().create(input);
+    return inquiriesRepository().create(input, contexto);
   });
 }
