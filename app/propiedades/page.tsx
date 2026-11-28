@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { FallaDeDatos } from "@/components/falla-de-datos";
 import { AvisoDeDescartados } from "@/components/propiedades/aviso-de-descartados";
 import { FiltrosAplicados } from "@/components/propiedades/filtros-aplicados";
@@ -66,6 +67,12 @@ async function SeccionDeResultados({ consulta }: { consulta: Promise<Consulta> }
   const { filtros, pagina, catalog } = await consulta;
   const resultado = await searchListings(filtros, pagina);
 
+  // "hace 3 días" necesita la hora, y leer el reloj en el render de un
+  // componente rompe el prerender: se declara el acceso dinámico una vez y se
+  // baja la fecha por props.
+  await connection();
+  const ahora = new Date();
+
   // La búsqueda falló (API caída, timeout, payload roto). Los filtros siguen
   // arriba: el visitante puede cambiar la búsqueda sin perder lo que escribió.
   if (!resultado.ok) return <FallaDeDatos failure={resultado.failure} como="section" />;
@@ -89,7 +96,7 @@ async function SeccionDeResultados({ consulta }: { consulta: Promise<Consulta> }
           que le dice al visitante si vale la pena filtrar más. */}
       <p aria-live="polite">{pluralizar(total, "propiedad", "propiedades")}</p>
       <FiltrosAplicados filtros={filtros} catalog={catalog} />
-      <ListadoDePropiedades listings={items} />
+      <ListadoDePropiedades listings={items} ahora={ahora} />
       {/* `totalPages` es 0 sin resultados, no 1: el paginador no se dibuja. */}
       <Paginador filtros={filtros} pagina={page} totalPages={totalPages} />
     </section>

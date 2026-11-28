@@ -34,7 +34,18 @@ function SinFoto() {
   );
 }
 
-export function TarjetaDePropiedad({ listing }: { listing: ListingSummary }) {
+// `ahora` llega por prop y no se lee acá con `new Date()`: leer el reloj
+// durante el render rompe el prerender con `blocking-prerender-current-time`
+// (el valor cambia entre renders), Next descarta el intento y vuelve a
+// renderizar la ruta entera. Lo verificamos en el log. La página lee la hora
+// una vez, después de declarar que se renderiza por request, y la baja.
+export function TarjetaDePropiedad({
+  listing,
+  ahora,
+}: {
+  listing: ListingSummary;
+  ahora: Date;
+}) {
   const { location } = listing;
   // El mismo título y la misma URL canónica que usa la ficha: dos versiones
   // del título de la misma propiedad se desincronizan solas.
@@ -88,7 +99,7 @@ export function TarjetaDePropiedad({ listing }: { listing: ListingSummary }) {
         {/* `dateTime` en ISO: el texto es relativo ("hace 3 días") y sin esto
             no queda en ningún lado cuándo fue. */}
         <time dateTime={listing.createdAt.toISOString()}>
-          {formatearPublicacion(listing.createdAt)}
+          {formatearPublicacion(listing.createdAt, ahora)}
         </time>
       </p>
     </article>

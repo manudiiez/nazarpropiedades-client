@@ -18,6 +18,47 @@ export const CAMPOS = {
   listingId: "listingId",
 } as const;
 
+// El formulario manda además a dónde volver con la confirmación. No es un
+// campo de la consulta, así que no entra en CAMPOS: la action lo usa para
+// redirigir y nunca llega a la API.
+export const CAMPO_VOLVER_A = "volverA";
+
+// El param con el que la página sabe que tiene que mostrar la confirmación.
+export const PARAM_CONSULTA = "consulta";
+export const CONSULTA_ENVIADA = "enviada";
+
+// Por qué la confirmación es un redirect y no solo el estado del formulario:
+//
+// con `cacheComponents` el contenido de la página vive en un `<Suspense>`, y la
+// respuesta de un POST trae la cáscara en HTML y el estado nuevo SOLO en el
+// payload de RSC, para que lo aplique el cliente. Lo verificamos: sin
+// JavaScript, un envío correcto creaba la consulta y devolvía el formulario
+// igual que antes, sin confirmación y sin los datos. El visitante no tiene
+// forma de saber que se envió, así que lo manda de nuevo.
+//
+// Un POST → 303 → GET lo arregla en los dos caminos, y de paso evita que
+// recargar reenvíe la consulta.
+//
+// El destino viene del formulario, o sea del visitante: se acepta solo una ruta
+// interna. Sin este chequeo, `volverA=https://otro-sitio` convierte al
+// formulario en un redirector abierto, que es phishing gratis con nuestro
+// dominio.
+function esRutaInterna(valor: string): boolean {
+  if (!valor.startsWith("/")) return false;
+  // `//otro-sitio` y `/\otro-sitio` son URLs absolutas para el navegador.
+  if (valor.startsWith("//") || valor.startsWith("/\\")) return false;
+  // Un salto de línea permitiría inyectar headers si el destino se usara en
+  // otro contexto.
+  return !/[\r\n]/.test(valor);
+}
+
+export function destinoDeConfirmacion(formData: FormData): string | null {
+  const valor = texto(formData, CAMPO_VOLVER_A).trim();
+  if (valor === "" || !esRutaInterna(valor)) return null;
+  const separador = valor.includes("?") ? "&" : "?";
+  return `${valor}${separador}${PARAM_CONSULTA}=${CONSULTA_ENVIADA}`;
+}
+
 export type EstadoConsulta =
   // Todavía no se envió nada.
   | { estado: "inicial" }

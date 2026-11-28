@@ -1,12 +1,16 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { notFound, redirect } from "next/navigation";
 import { FallaDeDatos } from "@/components/falla-de-datos";
+import { ConsultaEnviada } from "@/components/consulta-enviada";
+import { FormularioDeConsulta } from "@/components/formulario-de-consulta";
 import { BloqueDeAtributos } from "@/components/propiedades/bloque-de-atributos";
 import { Galeria } from "@/components/propiedades/galeria";
 import { ListadoDePropiedades } from "@/components/propiedades/listado-de-propiedades";
 import { MapaDePropiedad } from "@/components/propiedades/mapa-de-propiedad";
 import { OtrosAvisos } from "@/components/propiedades/otros-avisos";
 import { getCatalog, getListing, getRelatedListings } from "@/lib/data/queries";
+import { CONSULTA_ENVIADA, PARAM_CONSULTA } from "@/lib/forms/consulta";
 import {
   formatearExpensas,
   formatearPrecioPorMes,
@@ -43,15 +47,23 @@ import {
 // cliente desde el payload de RSC. Lo verificamos: con boundary el HTML trae la
 // ficha completa (59 KB), sin boundary trae 13 KB de cáscara y nada de
 // contenido. En la página que tiene que indexar Google eso no es un detalle.
-export default function PropiedadPage({ params }: PageProps<"/propiedad/[id]/[[...slug]]">) {
+type PropsDeLaRuta = PageProps<"/propiedad/[id]/[[...slug]]">;
+
+export default function PropiedadPage({ params, searchParams }: PropsDeLaRuta) {
   return (
     <Suspense fallback={<p className="px-4 py-8">Cargando la propiedad…</p>}>
-      <Ficha params={params} />
+      <Ficha params={params} searchParams={searchParams} />
     </Suspense>
   );
 }
 
-async function Ficha({ params }: { params: PageProps<"/propiedad/[id]/[[...slug]]">["params"] }) {
+async function Ficha({
+  params,
+  searchParams,
+}: {
+  params: PropsDeLaRuta["params"];
+  searchParams: PropsDeLaRuta["searchParams"];
+}) {
   const { id: crudo, slug } = await params;
 
   // Un id no numérico es 404 sin tocar la red: `/propiedad/casa-linda` no es
@@ -74,6 +86,19 @@ async function Ficha({ params }: { params: PageProps<"/propiedad/[id]/[[...slug]
   const slugActual = (slug ?? []).join("/");
   if (slugActual !== slugDePropiedad(listing)) redirect(urlDePropiedad(listing));
 
+  // Ver el comentario en TarjetaDePropiedad: la hora se lee una sola vez, acá,
+  // después de declarar que esto se renderiza por request.
+  await connection();
+  const ahora = new Date();
+
+  // La confirmación de la consulta viene por la URL (`?consulta=enviada`): la
+  // action redirige acá después de crearla, que es lo que hace que se vea
+  // también sin JavaScript.
+  const query = await searchParams;
+  const valorDeConsulta = query[PARAM_CONSULTA];
+  const consultaEnviada =
+    (Array.isArray(valorDeConsulta) ? valorDeConsulta[0] : valorDeConsulta) === CONSULTA_ENVIADA;
+
   const catalog = catalogo.ok ? catalogo.data : {};
   const titulo = tituloDePropiedad(listing);
   const expensas = formatearExpensas(listing.expenses);
@@ -90,7 +115,7 @@ async function Ficha({ params }: { params: PageProps<"/propiedad/[id]/[[...slug]
         <p>{listing.location.fullAddress}</p>
         <p className="text-sm">
           <time dateTime={listing.createdAt.toISOString()}>
-            {formatearPublicacion(listing.createdAt)}
+            {formatearPublicacion(listing.createdAt, ahora)}
           </time>
         </p>
       </header>
@@ -128,6 +153,20 @@ async function Ficha({ params }: { params: PageProps<"/propiedad/[id]/[[...slug]
 
       <Enlaces listing={listing} />
 
+      {/* La consulta por ESTA propiedad: `fuente: "propiedad_individual"` y el
+          id, que la API exige en ese caso. */}
+      {consultaEnviada ? (
+        <ConsultaEnviada volverA={urlDePropiedad(listing)} />
+      ) : (
+        <FormularioDeConsulta
+          fuente="propiedad_individual"
+          listingId={listing.id}
+          titulo="Consultar por esta propiedad"
+          volverA={urlDePropiedad(listing)}
+          descripcion={`Dejanos tus datos y te contactamos por ${titulo}.`}
+        />
+      )}
+
       <OtrosAvisos siblings={listing.siblingListings} catalog={catalog} />
 
       {/* Las relacionadas son una sección accesoria: si la lectura falla,
@@ -135,7 +174,7 @@ async function Ficha({ params }: { params: PageProps<"/propiedad/[id]/[[...slug]
           propio Suspense para no retrasar la ficha, que es lo que el visitante
           vino a ver. */}
       <Suspense fallback={null}>
-        <Relacionadas id={listing.id} />
+        <Relacionadas id={listing.id} ahora={ahora} />
       </Suspense>
     </main>
   );
@@ -165,14 +204,14 @@ function Enlaces({ listing }: { listing: { videoUrl: string | null; tour360Url: 
   );
 }
 
-async function Relacionadas({ id }: { id: number }) {
+async function Relacionadas({ id, ahora }: { id: number; ahora: Date }) {
   const relacionadas = await getRelatedListings(id);
   if (relacionadas.length === 0) return null;
 
   return (
     <section className="flex flex-col gap-3">
       <h2 className="text-lg font-semibold">Propiedades parecidas</h2>
-      <ListadoDePropiedades listings={relacionadas} />
+      <ListadoDePropiedades listings={relacionadas} ahora={ahora} />
     </section>
   );
 }

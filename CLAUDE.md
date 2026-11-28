@@ -77,6 +77,7 @@ Precios, superficies, atributos y fechas se formatean en `lib/format`, con funci
 - **Lo que no se puede mostrar devuelve `null`**, no `""`: así el componente no dibuja la línea en lugar de dibujarla vacía. Vale para las expensas ausentes y para los atributos sin valor.
 - **El sufijo lo manda la API** en cada atributo; no se inventa. El `0` y los booleanos se muestran (`Sí`/`No`): "sin cochera" es un dato, no ausencia de dato.
 - **Las claves de `keyAttributes` varían por propiedad** y el tipo es `Partial`: todo formateador que las consuma maneja `undefined`, que es el caso normal.
+- **La hora no se lee en el render de un componente.** `new Date()` durante el prerender rompe con `blocking-prerender-current-time`: Next descarta el intento y vuelve a renderizar la ruta entera (apareció en el log con el listado y la ficha ya hechos). La página declara el acceso dinámico con `await connection()`, lee la hora una vez y la baja por props; por eso `formatearFecha` y `formatearPublicacion` reciben `ahora`.
 - **Las fechas van relativas hasta 30 días** y absolutas después: nadie lee "hace 237 días". `formatearFecha` recibe `ahora` como parámetro para poder testearlo. Ojo: en español `numeric: "auto"` devuelve "ayer" y "anteayer", no solo "hace N días", así que la preposición de "Publicado …" no se puede decidir con un `startsWith("hace")`.
 
 ### Filtros en la URL
@@ -116,6 +117,15 @@ La ficha. Es la página que indexa Google y la que se comparte, así que las dec
 - **Algunos atributos traen el valor del enum en crudo** (`garage_type: "garage_doble"`). La etiqueta y el sufijo sí vienen listos, pero el valor no tiene endpoint que lo traduzca: `lib/format/atributos.ts` normaliza solo lo que tiene pinta de slug (todo minúscula, sin espacios) para no tocar lo que el CRM escribió a mano. Lo correcto es que la API mande la etiqueta del valor.
 - **Los nombres de las secciones los pone el front** (`lib/format/secciones.ts`), porque la API manda la clave (`dimensions`, `amenities_comfort`) y no hay endpoint que devuelva su nombre. Es la única excepción a "las etiquetas vienen de la API", y una sección desconocida se degrada con `humanize`. El orden de las secciones es el de la respuesta: la API ya ordena por prioridad.
 - Los tres bloques de atributos (`attributes`, `amenities`, `nearbyZones`) **pueden venir vacíos** si no hay strategy para ese par (tipo, condición): cada bloque decide no dibujarse. Las relacionadas van en su propio `<Suspense>` y degradan a nada.
+
+### Formulario de consulta
+
+`components/formulario-de-consulta.tsx` usa la Server Action de `lib/actions/consultas.ts`. Dos usos con el mismo componente: la consulta general y la de una propiedad (`fuente="propiedad_individual"` + `listingId`, que la API **exige** en ese caso).
+
+- **La confirmación es un redirect, no solo el estado del formulario.** Con `cacheComponents`, la respuesta de un POST trae la cáscara en HTML y el estado nuevo **solo en el payload de RSC**, para que lo aplique el cliente. Verificado: sin JavaScript, un envío correcto creaba la consulta y devolvía el formulario igual que antes — ni confirmación, ni datos, ni aviso. Por eso la action hace **POST → 303 → GET** con `?consulta=enviada`, que además evita que recargar reenvíe la consulta. El `permalink` de `useActionState` no alcanza: se probó y no cambia nada.
+- **El destino del redirect viene del formulario, o sea del visitante**: `destinoDeConfirmacion` acepta solo rutas internas. Sin ese chequeo, `volverA=https://sitio-malo` convierte al formulario en un redirector abierto, que es phishing gratis con nuestro dominio.
+- **Los atributos nativos (`required`, `type`, `pattern`, `maxLength`) duplican a propósito las reglas de `validateInquiry`**: son lo único que marca un campo mal cargado cuando no hay JavaScript, porque los errores por campo del server llegan por el payload de RSC y no se renderizan. Los del server son los que mandan, porque el endpoint es público.
+- `useId` para los ids: el formulario de una propiedad y el general pueden convivir en la misma página, y dos inputs con el mismo id rompen la asociación del `<label>`.
 
 ### Caché
 

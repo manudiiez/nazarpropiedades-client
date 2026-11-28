@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   CAMPOS,
+  CAMPO_VOLVER_A,
+  destinoDeConfirmacion,
   errorAEstado,
   parsearConsulta,
   valoresEnviados,
@@ -171,5 +173,40 @@ describe("reglas de la API que el formulario tiene que anticipar", () => {
     );
     if (estado.estado !== "error") return expect.unreachable();
     expect(estado.campos).toEqual({ listingId: "falta" });
+  });
+});
+
+// El destino de la confirmación viene del formulario, o sea del visitante.
+describe("destinoDeConfirmacion", () => {
+  it("agrega el param a la ruta del formulario", () => {
+    expect(destinoDeConfirmacion(form({ [CAMPO_VOLVER_A]: "/propiedad/42/casa" }))).toBe(
+      "/propiedad/42/casa?consulta=enviada",
+    );
+  });
+
+  it("respeta la query que ya traía", () => {
+    expect(destinoDeConfirmacion(form({ [CAMPO_VOLVER_A]: "/propiedades?orden=reciente" }))).toBe(
+      "/propiedades?orden=reciente&consulta=enviada",
+    );
+  });
+
+  it("rechaza cualquier destino que no sea una ruta interna", () => {
+    // Sin esto, `volverA=https://sitio-malo` convierte el formulario en un
+    // redirector abierto: phishing gratis con nuestro dominio.
+    for (const destino of [
+      "https://sitio-malo.example",
+      "//sitio-malo.example",
+      "/\\sitio-malo.example",
+      "javascript:alert(1)",
+      "propiedades",
+      "/propiedades\nLocation: https://sitio-malo.example",
+      "",
+    ]) {
+      expect(destinoDeConfirmacion(form({ [CAMPO_VOLVER_A]: destino }))).toBeNull();
+    }
+  });
+
+  it("sin destino no redirige: el camino con JavaScript muestra el estado", () => {
+    expect(destinoDeConfirmacion(form({}))).toBeNull();
   });
 });
