@@ -1,0 +1,307 @@
+{
+  "listado": {
+    "success": true,
+    "data": [
+      {
+        "id": 2,
+        "property_type": "house",
+        "condition": "sale",
+        "price": "300000.00",
+        "currency": "USD",
+        "province": "mendoza",
+        "department": "godoy_cruz",
+        "zone": "godoy_cruz_centro",
+        "neighborhood_or_street": "Calle Ejemplo 1234",
+        "full_address": "CALLE EJEMPLO 1234, GODOY CRUZ, MENDOZA",
+        "has_expenses": true,
+        "expenses": "50000.00",
+        "expenses_currency": "ARS",
+        "key_attributes": {
+          "bedrooms": "3",
+          "bathrooms": "5",
+          "total_area": "620",
+          "garage_capacity": "2",
+          "covered_area": "420"
+        },
+        "cover_photo": {
+          "url": "https://fotos.example.invalid/propiedades/9/foto-0_1400w_display.webp",
+          "thumbnail_url": "https://fotos.example.invalid/propiedades/9/foto-0_400w_thumb.webp",
+          "sort_order": 0
+        },
+        "created_at": "2026-10-27T21:33:18.923109Z"
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "limit": 1,
+      "total": 1,
+      "total_pages": 1
+    }
+  },
+  "detalle": {
+    "success": true,
+    "data": {
+      "id": 2,
+      "property_type": "house",
+      "condition": "sale",
+      "status": "active",
+      "price": "300000.00",
+      "currency": "USD",
+      "title": null,
+      "description": "Descripción de ejemplo para los tests. Dos plantas, patio y cochera.",
+      "province": "mendoza",
+      "department": "godoy_cruz",
+      "zone": "godoy_cruz_centro",
+      "neighborhood_or_street": "Calle Ejemplo 1234",
+      "full_address": "CALLE EJEMPLO 1234, GODOY CRUZ, MENDOZA",
+      "latitude": -32.9558745,
+      "longitude": -68.8590911,
+      "show_map": true,
+      "map_mode": "radius",
+      "map_range": 500,
+      "has_expenses": true,
+      "expenses": "50000.00",
+      "expenses_currency": "ARS",
+      "attributes": [
+        {
+          "key": "total_area",
+          "value": "620",
+          "label": "Superficie Total",
+          "suffix": "m²",
+          "section": "dimensions"
+        },
+        {
+          "key": "covered_area",
+          "value": "420",
+          "label": "Superficie Cubierta",
+          "suffix": "m²",
+          "section": "dimensions"
+        },
+        {
+          "key": "bedrooms",
+          "value": "3",
+          "label": "Dormitorios",
+          "suffix": null,
+          "section": "rooms"
+        },
+        {
+          "key": "bathrooms",
+          "value": "5",
+          "label": "Baños",
+          "suffix": null,
+          "section": "rooms"
+        },
+        {
+          "key": "garage_type",
+          "value": "garage_doble",
+          "label": "Cochera",
+          "suffix": null,
+          "section": "features"
+        },
+        {
+          "key": "garage_capacity",
+          "value": "2",
+          "label": "Capacidad Cochera",
+          "suffix": null,
+          "section": "features"
+        },
+        {
+          "key": "storage_units",
+          "value": "3",
+          "label": "Bauleras",
+          "suffix": null,
+          "section": "features"
+        },
+        {
+          "key": "age",
+          "value": "12",
+          "label": "Antigüedad",
+          "suffix": "años",
+          "section": "features"
+        },
+        {
+          "key": "conservation_state",
+          "value": "excelente",
+          "label": "Estado de Conservación",
+          "suffix": null,
+          "section": "features"
+        }
+      ],
+      "amenities": [],
+      "video_url": null,
+      "tour360_url": null,
+      "nearby_zones": [],
+      "photos": [
+        {
+          "url": "https://fotos.example.invalid/propiedades/9/foto-0_1400w_display.webp",
+          "thumbnail_url": "https://fotos.example.invalid/propiedades/9/foto-0_400w_thumb.webp",
+          "sort_order": 0
+        },
+        {
+          "url": "https://fotos.example.invalid/propiedades/9/foto-1_1400w_display.webp",
+          "thumbnail_url": "https://fotos.example.invalid/propiedades/9/foto-1_400w_thumb.webp",
+          "sort_order": 1
+        },
+        {
+          "url": "https://fotos.example.invalid/propiedades/9/foto-2_1400w_display.webp",
+          "thumbnail_url": "https://fotos.example.invalid/propiedades/9/foto-2_400w_thumb.webp",
+          "sort_order": 2
+        },
+        {
+          "url": "https://fotos.example.invalid/propiedades/9/foto-3_1400w_display.webp",
+          "thumbnail_url": "https://fotos.example.invalid/propiedades/9/foto-3_400w_thumb.webp",
+          "sort_order": 3
+        },
+        {
+          "url": "https://fotos.example.invalid/propiedades/9/foto-4_1400w_display.webp",
+          "thumbnail_url": "https://fotos.example.invalid/propiedades/9/foto-4_400w_thumb.webp",
+          "sort_order": 4
+        },
+        {
+          "url": "https://fotos.example.invalid/propiedades/9/foto-5_1400w_display.webp",
+          "thumbnail_url": "https://fotos.example.invalid/propiedades/9/foto-5_400w_thumb.webp",
+          "sort_order": 5
+        }
+      ],
+      "sibling_listings": [],
+      "created_at": "2026-10-27T21:33:18.923109Z"
+    }
+  },
+  "facets": {
+    "success": true,
+    "data": {
+      "provinces": [
+        {
+          "value": "mendoza",
+          "label": "Mendoza",
+          "count": 1,
+          "departments": [
+            {
+              "value": "godoy_cruz",
+              "label": "Godoy Cruz",
+              "count": 1,
+              "zones": [
+                {
+                  "value": "godoy_cruz_centro",
+                  "label": "Godoy Cruz Centro",
+                  "count": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "property_types": [
+        {
+          "value": "house",
+          "label": "Casa",
+          "count": 1
+        },
+        {
+          "value": "garage",
+          "label": "Cochera",
+          "count": 0
+        },
+        {
+          "value": "apartment",
+          "label": "Departamento",
+          "count": 0
+        },
+        {
+          "value": "duplex",
+          "label": "Dúplex",
+          "count": 0
+        },
+        {
+          "value": "service-station",
+          "label": "Estación de servicio",
+          "count": 0
+        },
+        {
+          "value": "farm",
+          "label": "Finca",
+          "count": 0
+        },
+        {
+          "value": "goodwill",
+          "label": "Fondo de comercio",
+          "count": 0
+        },
+        {
+          "value": "shed",
+          "label": "Galpón",
+          "count": 0
+        },
+        {
+          "value": "commercial",
+          "label": "Local comercial",
+          "count": 0
+        },
+        {
+          "value": "lot",
+          "label": "Lote",
+          "count": 0
+        },
+        {
+          "value": "office",
+          "label": "Oficina",
+          "count": 0
+        },
+        {
+          "value": "ph",
+          "label": "PH",
+          "count": 0
+        },
+        {
+          "value": "parking-lot",
+          "label": "Playa de estacionamiento",
+          "count": 0
+        },
+        {
+          "value": "semi-floor",
+          "label": "Semipiso",
+          "count": 0
+        },
+        {
+          "value": "land",
+          "label": "Terreno",
+          "count": 0
+        },
+        {
+          "value": "triplex",
+          "label": "Tríplex",
+          "count": 0
+        }
+      ],
+      "conditions": [
+        {
+          "value": "rent",
+          "label": "Alquiler",
+          "count": 0
+        },
+        {
+          "value": "temporary_rent",
+          "label": "Alquiler temporario",
+          "count": 0
+        },
+        {
+          "value": "exchange",
+          "label": "Permuta",
+          "count": 0
+        },
+        {
+          "value": "sale",
+          "label": "Venta",
+          "count": 1
+        }
+      ],
+      "price_range": {
+        "USD": {
+          "min": "300000.00",
+          "max": "300000.00"
+        }
+      },
+      "total": 1
+    }
+  }
+}
