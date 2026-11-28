@@ -1,7 +1,9 @@
 "use server";
 
 import { headers } from "next/headers";
+import { getConfig } from "@/lib/config";
 import { createInquiry } from "@/lib/data/queries";
+import { ipDesdeForwardedFor } from "@/lib/forms/client-ip";
 import {
   errorAEstado,
   parsearConsulta,
@@ -26,19 +28,13 @@ import {
 //
 // `headers()` se lee acá, fuera de cualquier scope con `use cache`: adentro
 // falla con next-request-in-use-cache.
+//
+// Se manda UNA sola IP, no la cadena que nos llegó: la API toma la última
+// entrada no confiable de lo que recibe, así que reenviar la cadena completa
+// le haría elegir mal si nuestra infra agrega saltos.
 async function ipDelVisitante(): Promise<string | null> {
   const lista = await headers();
-
-  // El primer valor de X-Forwarded-For es el cliente original; el resto son
-  // los proxies intermedios.
-  const forwarded = lista.get("x-forwarded-for");
-  if (forwarded !== null && forwarded.trim() !== "") {
-    const primera = forwarded.split(",")[0]?.trim();
-    if (primera !== undefined && primera !== "") return primera;
-  }
-
-  const real = lista.get("x-real-ip");
-  return real !== null && real.trim() !== "" ? real.trim() : null;
+  return ipDesdeForwardedFor(lista.get("x-forwarded-for"), getConfig().trustedProxyHops);
 }
 
 export async function enviarConsulta(
