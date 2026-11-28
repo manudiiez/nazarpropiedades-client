@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   MAX_DESCRIPCION,
   debeIndexar,
+  escaparParaXml,
+  urlsDeListados,
   descripcionDeListado,
   descripcionDePropiedad,
   fotosParaCompartir,
@@ -11,7 +13,7 @@ import {
   tituloDeListado,
 } from "@/lib/seo";
 import { mapCatalog } from "@/lib/data/http/mappers";
-import type { Catalog, Listing, ListingFilters } from "@/lib/domain";
+import type { Catalog, Facets, Listing, ListingFilters } from "@/lib/domain";
 import catalogFixture from "@/lib/data/mock/fixtures/catalog.json";
 
 const CATALOGO: Catalog = mapCatalog(catalogFixture);
@@ -187,5 +189,57 @@ describe("datos estructurados", () => {
     expect(html).toContain("\\u003c");
     // Y sigue siendo JSON válido.
     expect(() => JSON.parse(html)).not.toThrow();
+  });
+});
+
+describe("sitemap", () => {
+  const facets: Facets = {
+    conditions: [
+      { value: "sale", label: "Venta", count: 6 },
+      { value: "rent", label: "Alquiler", count: 0 },
+      { value: "inventada", label: "Inventada", count: 3 },
+    ],
+    propertyTypes: [],
+    priceRange: {},
+    total: 6,
+    provinces: [
+      {
+        value: "mendoza",
+        label: "Mendoza",
+        count: 6,
+        departments: [
+          { value: "capital", label: "Capital", count: 4, zones: [] },
+          { value: "maipu", label: "Maipú", count: 0, zones: [] },
+        ],
+      },
+    ],
+  };
+
+  it("publica solo lo que tiene publicaciones y el front sabe filtrar", () => {
+    const urls = urlsDeListados(facets);
+    expect(urls).toContain("/");
+    expect(urls).toContain("/propiedades");
+    expect(urls).toContain("/propiedades?operacion=venta");
+    expect(urls).toContain("/propiedades?provincia=mendoza&departamento=capital");
+    // Sin publicaciones el link promete una lista vacía.
+    expect(urls).not.toContain("/propiedades?operacion=alquiler");
+    expect(urls.some((url) => url.includes("maipu"))).toBe(false);
+    // Una condición que la API agregó y el front no conoce no se puede filtrar.
+    expect(urls.some((url) => url.includes("inventada"))).toBe(false);
+  });
+
+  it("sin facets publica al menos las páginas fijas", () => {
+    expect(urlsDeListados(null)).toEqual(["/", "/propiedades"]);
+  });
+
+  it("escapa el & de la query: Next no lo hace y el XML queda mal formado", () => {
+    // Verificado contra el sitemap servido: sin esto, un parser de XML falla en
+    // la primera URL con filtros y Google rechaza el sitemap entero.
+    expect(escaparParaXml("https://x.com/propiedades?a=1&b=2")).toBe(
+      "https://x.com/propiedades?a=1&amp;b=2",
+    );
+    // Si algún día Next empieza a escapar, este test queda como la señal para
+    // sacar el escapeo de acá en vez de terminar con "&amp;amp;".
+    expect(escaparParaXml("sin query")).toBe("sin query");
   });
 });

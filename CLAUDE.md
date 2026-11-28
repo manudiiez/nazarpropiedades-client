@@ -147,6 +147,12 @@ La ficha. Es la página que indexa Google y la que se comparte, así que las dec
 - **`noindex, follow` en los filtros profundos** (precio, superficie, ambientes, amenities, dirección, orden distinto del default, multi-valor, página > 1). `follow` igual: no se indexa la URL, pero las fichas se descubren desde cualquier listado.
 - **Las coordenadas del JSON-LD siguen la misma regla que el mapa**: solo con `showMap` y `mode: "exact"`. Publicar el punto en los datos estructurados cuando la UI muestra el área es filtrarlo por JSON.
 - **El JSON-LD se escapa con `jsonLdAHtml`**: la descripción la escribe el CRM, y un `</script>` ahí adentro cierra la etiqueta. Es XSS almacenado, no un detalle de formato.
+- **`app/sitemap.ts` y `app/robots.ts` se generan por request (`await connection()`).** Si no, se prerenderizan en el build —sin variables— y quedan horneados: el robots.txt decía `Disallow: /` para siempre y producción no se indexaba nunca. Verificado con el contenedor levantado con `APP_ENV=production`.
+- **Staging no se indexa**: con `APP_ENV` distinto de `production`, el robots.txt devuelve `disallow: /` y el sitemap sale vacío. El default es "no es producción": si falta la variable lo peor que pasa es que el sitio no se indexe —se ve en `/robots.txt`—, en vez de indexar staging en silencio y competir con el sitio real.
+- **El robots.txt NO bloquea los listados con filtros**, aunque el issue #37 lo proponía: esas URLs ya salen con `noindex, follow`, y un `Disallow` impide que Google LEA ese noindex. Las dos cosas juntas se estorban.
+- **Next no escapa el `&` de la query string en el sitemap**, así que una URL con filtros rompe el XML y Google lo rechaza entero. Se escapa en `lib/seo/sitemap.ts` antes de dárselo a Next; si alguna vez Next lo arregla, el test de `escaparParaXml` es el que avisa.
+- **El sitemap enumera paginando el listado** (la API no tiene endpoint de ids), de a 100 y con tope de 20 pedidos, cacheado con `cacheLife("hours")`: lo pide un crawler, no un visitante. Si el tope queda corto, la solución es pedirle a la API un endpoint de ids, no subirlo.
+- **`lastModified` se omite**: el dominio tiene `createdAt` pero no fecha de modificación, y mandar la de creación le miente a Google sobre la frescura. Cuando la API exponga `updated_at`, va ahí.
 - La imagen por defecto de Open Graph la genera `app/opengraph-image.tsx` con `next/og`, que es parte de Next: no hay un PNG en `public/` que mantener. Cuando haya diseño, se reemplaza ahí.
 
 ### Caché
@@ -199,6 +205,7 @@ Con `cacheComponents`, una ruta que bloquea esperando datos dinámicos **falla e
 | `DATA_SOURCE` | `api` o `mock`. Sin valor válido, la app no arranca. |
 | `API_URL` | URL de la API. Variable de **runtime**, no build-arg. |
 | `SITE_URL` | URL pública del sitio, para las canónicas y el Open Graph. Runtime. Sin ella, lo que se comparte no resuelve la imagen. |
+| `APP_ENV` | `production` habilita la indexación (robots + sitemap). Cualquier otro valor, o ausente, la bloquea. Mismo nombre que en la API. |
 
 **No hay ninguna `NEXT_PUBLIC_*`.** Ningún pedido sale del browser, ni el POST del formulario (va por Server Action reenviando la IP del visitante en `X-Forwarded-For`, para que el rate limit de la API cuente por visitante). Por eso la **misma imagen `vX.Y.Z` sirve staging y producción**.
 
