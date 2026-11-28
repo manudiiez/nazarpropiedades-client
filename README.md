@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NazarPropiedades — sitio público
 
-## Getting Started
+Front-end del sitio de la inmobiliaria. Next.js 16 (App Router) + Tailwind v4.
 
-First, run the development server:
+La API es un repo aparte (FastAPI). Este proyecto solo la consume.
+
+## Levantarlo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local
+npm run dev            # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Sin backend
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+No hace falta tener la API levantada: hay una implementación con fixtures en disco.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# en .env.local
+DATA_SOURCE=mock
+```
 
-## Learn More
+Trae 10 propiedades de Mendoza y el catálogo completo (18 departamentos, 215 zonas, 44 amenities), con casos borde a propósito: sin fotos procesadas, sin título, sin zona, con y sin expensas, la misma propiedad en venta y alquiler.
 
-To learn more about Next.js, take a look at the following resources:
+### Contra la API local
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# en .env.local
+DATA_SOURCE=api
+API_URL=http://localhost:8000/api/v1
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Comandos
 
-## Deploy on Vercel
+| Comando | Qué hace |
+|---|---|
+| `npm run dev` | servidor de desarrollo (Turbopack) |
+| `npm test` | tests (Vitest) |
+| `npm run lint` | ESLint |
+| `npx tsc --noEmit` | chequeo de tipos |
+| `npm run build` | build de producción |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Los tests de la suite de contrato que pegan a la API se saltean si no hay una respondiendo. Para correrlos contra otra: `TEST_API_URL=... npm test`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Cómo se accede a los datos
+
+Todo pasa por `lib/data/queries`. **Los componentes no hacen `fetch` ni conocen la URL de la API.**
+
+```ts
+import { searchListings, getListing } from "@/lib/data/queries";
+
+const resultado = await searchListings({ condition: ["sale"] }, { page: 1, limit: 12 });
+
+if (!resultado.ok) {
+  // resultado.failure.title y .message vienen en español, listos para mostrar
+  return <Error failure={resultado.failure} />;
+}
+
+// resultado.data.items — y si está vacío, no es un error: filtró demasiado
+```
+
+Ninguna de esas funciones lanza: devuelven `DataResult`, así que un problema de datos no puede tirar abajo la página. El detalle está en `CLAUDE.md`, sección "Capa de datos", incluidas las trampas del contrato de la API.
+
+## Variables de entorno
+
+| Variable | Obligatoria | Para qué |
+|---|---|---|
+| `DATA_SOURCE` | sí | `api` o `mock` |
+| `API_URL` | con `api` | URL de la API, **de runtime** |
+
+No hay ninguna `NEXT_PUBLIC_*`: ningún pedido sale del browser. Por eso la misma imagen de Docker sirve staging y producción.
+
+## Imagen Docker
+
+```bash
+docker build -t nazarpropiedades-client .
+docker run --rm -p 3000:3000 -e DATA_SOURCE=mock nazarpropiedades-client
+```
+
+Multi-stage sobre `node:22-alpine` con `output: "standalone"`, usuario no root, ~211 MB. La publica el CI: `:testing` al mergear a `testing`, `:vX.Y.Z` al publicar un tag.
+
+## Flujo de trabajo
+
+`develop` → `testing` → `main`, todo por Pull Request, con Conventional Commits. Está documentado en `CLAUDE.md` y en `.claude/skills/flujo-github/`.

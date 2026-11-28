@@ -1,0 +1,1053 @@
+[
+  {
+    "province": "mendoza",
+    "zone": "chacras_de_coria",
+    "neighborhood_or_street": "Viamonte 2300",
+    "has_expenses": false,
+    "expenses": null,
+    "expenses_currency": null,
+    "title": "Casa con parque y piscina en Chacras de Coria",
+    "description": "Casa de dos plantas sobre lote de 1200 m², con parque añoso, piscina y quincho con asador. Living comedor con hogar a leña, cocina independiente con office y dependencia de servicio.",
+    "latitude": -32.9842,
+    "longitude": -68.8761,
+    "show_map": true,
+    "map_mode": "exact",
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [
+      {
+        "key": "swimming_pool",
+        "value": "True",
+        "label": "Piscina",
+        "suffix": null,
+        "section": "amenities_comfort"
+      },
+      {
+        "key": "grill",
+        "value": "True",
+        "label": "Parrilla",
+        "suffix": null,
+        "section": "amenities_comfort"
+      },
+      {
+        "key": "garden",
+        "value": "True",
+        "label": "Jardín",
+        "suffix": null,
+        "section": "common_areas"
+      },
+      {
+        "key": "air_conditioning",
+        "value": "True",
+        "label": "Aire Acondicionado",
+        "suffix": null,
+        "section": "utilities"
+      }
+    ],
+    "nearby_zones": [
+      {
+        "key": "schools",
+        "value": "True",
+        "label": "Colegios",
+        "suffix": null,
+        "section": "nearby"
+      }
+    ],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-3_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-3_400w_thumb.webp",
+        "sort_order": 3
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-4_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-4_400w_thumb.webp",
+        "sort_order": 4
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-5_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-5_400w_thumb.webp",
+        "sort_order": 5
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-6_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-6_400w_thumb.webp",
+        "sort_order": 6
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-7_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-7_400w_thumb.webp",
+        "sort_order": 7
+      }
+    ],
+    "id": 1,
+    "property_type": "house",
+    "condition": "sale",
+    "price": "320000.00",
+    "currency": "USD",
+    "department": "lujan_de_cuyo",
+    "full_address": "VIAMONTE 2300, CHACRAS DE CORIA, LUJAN DE CUYO, MENDOZA",
+    "key_attributes": {
+      "bedrooms": "4",
+      "bathrooms": "3",
+      "total_area": "1200",
+      "covered_area": "310",
+      "garage_capacity": "2"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "1200",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "covered_area",
+        "value": "310",
+        "label": "Superficie Cubierta",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bedrooms",
+        "value": "4",
+        "label": "Dormitorios",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "bathrooms",
+        "value": "3",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "garage_capacity",
+        "value": "2",
+        "label": "Cocheras",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "age",
+        "value": "12",
+        "label": "Antigüedad",
+        "suffix": "años",
+        "section": "general"
+      },
+      {
+        "key": "orientation",
+        "value": "Norte",
+        "label": "Orientación",
+        "suffix": null,
+        "section": "general"
+      }
+    ],
+    "created_at": "2026-11-20T14:03:11.221000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/1/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": "4ta_seccion_area_fundacional",
+    "neighborhood_or_street": "Montevideo 150",
+    "has_expenses": true,
+    "expenses": "78000.00",
+    "expenses_currency": "ARS",
+    "title": "Departamento 2 dormitorios a estrenar en Ciudad",
+    "description": "Departamento a estrenar en edificio con amenities. Cocina integrada, balcón al frente, cochera cubierta opcional.",
+    "latitude": -32.8908,
+    "longitude": -68.8449,
+    "show_map": true,
+    "map_mode": "radius",
+    "map_range": 400,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [
+      {
+        "key": "elevator",
+        "value": "True",
+        "label": "Ascensor",
+        "suffix": null,
+        "section": "utilities"
+      },
+      {
+        "key": "balcony",
+        "value": "True",
+        "label": "Balcón",
+        "suffix": null,
+        "section": "amenities_rooms"
+      },
+      {
+        "key": "alarm",
+        "value": "True",
+        "label": "Alarma",
+        "suffix": null,
+        "section": "security"
+      }
+    ],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-3_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-3_400w_thumb.webp",
+        "sort_order": 3
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-4_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-4_400w_thumb.webp",
+        "sort_order": 4
+      }
+    ],
+    "id": 2,
+    "property_type": "apartment",
+    "condition": "rent",
+    "price": "450000.00",
+    "currency": "ARS",
+    "department": "capital",
+    "full_address": "MONTEVIDEO 150, PISO 4, CIUDAD, MENDOZA",
+    "key_attributes": {
+      "bedrooms": "2",
+      "bathrooms": "1",
+      "total_area": "68",
+      "covered_area": "62",
+      "floors": "4"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "68",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "covered_area",
+        "value": "62",
+        "label": "Superficie Cubierta",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bedrooms",
+        "value": "2",
+        "label": "Dormitorios",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "bathrooms",
+        "value": "1",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "age",
+        "value": "0",
+        "label": "Antigüedad",
+        "suffix": "años",
+        "section": "general"
+      }
+    ],
+    "created_at": "2026-11-24T09:12:40.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/2/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": null,
+    "neighborhood_or_street": null,
+    "has_expenses": false,
+    "expenses": null,
+    "expenses_currency": null,
+    "title": null,
+    "description": null,
+    "latitude": null,
+    "longitude": null,
+    "show_map": false,
+    "map_mode": null,
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [],
+    "nearby_zones": [],
+    "photos": [],
+    "id": 3,
+    "property_type": "lot",
+    "condition": "sale",
+    "price": "95000.00",
+    "currency": "USD",
+    "department": "maipu",
+    "full_address": "CALLE OZAMIS SUR SN, MAIPU, MENDOZA",
+    "key_attributes": {
+      "total_area": "800"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "800",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      }
+    ],
+    "created_at": "2026-11-26T18:45:02.000000Z",
+    "cover_photo": null
+  },
+  {
+    "province": "mendoza",
+    "zone": "godoy_cruz_centro",
+    "neighborhood_or_street": "Rivadavia 500",
+    "has_expenses": true,
+    "expenses": "120000.00",
+    "expenses_currency": "ARS",
+    "title": "Semipiso con vista a la cordillera",
+    "description": "Semipiso de 140 m² con tres dormitorios en suite, dependencia y doble cochera.",
+    "latitude": -32.9267,
+    "longitude": -68.8538,
+    "show_map": false,
+    "map_mode": "exact",
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [
+      {
+        "key": "elevator",
+        "value": "True",
+        "label": "Ascensor",
+        "suffix": null,
+        "section": "utilities"
+      },
+      {
+        "key": "security_24h",
+        "value": "True",
+        "label": "Seguridad 24hs",
+        "suffix": null,
+        "section": "security"
+      }
+    ],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-3_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-3_400w_thumb.webp",
+        "sort_order": 3
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-4_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-4_400w_thumb.webp",
+        "sort_order": 4
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-5_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-5_400w_thumb.webp",
+        "sort_order": 5
+      }
+    ],
+    "id": 4,
+    "property_type": "semi-floor",
+    "condition": "sale",
+    "price": "210000.00",
+    "currency": "USD",
+    "department": "godoy_cruz",
+    "full_address": "RIVADAVIA 500, GODOY CRUZ, MENDOZA",
+    "key_attributes": {
+      "bedrooms": "3",
+      "bathrooms": "3",
+      "total_area": "140",
+      "garage_capacity": "2",
+      "covered_area": "140"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "140",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bedrooms",
+        "value": "3",
+        "label": "Dormitorios",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "bathrooms",
+        "value": "3",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "garage_capacity",
+        "value": "2",
+        "label": "Cocheras",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "age",
+        "value": "8",
+        "label": "Antigüedad",
+        "suffix": "años",
+        "section": "general"
+      }
+    ],
+    "created_at": "2026-11-18T11:30:00.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/4/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": "1ra_seccion_parque_central",
+    "neighborhood_or_street": "San Martín 1100",
+    "has_expenses": true,
+    "expenses": "45000.00",
+    "expenses_currency": "ARS",
+    "title": "Local comercial sobre peatonal",
+    "description": "Local a la calle con vidriera sobre peatonal Sarmiento, baño y depósito.",
+    "latitude": null,
+    "longitude": null,
+    "show_map": false,
+    "map_mode": null,
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [
+      {
+        "id": 6,
+        "condition": "sale",
+        "status": "active",
+        "price": "185000.00",
+        "currency": "USD"
+      }
+    ],
+    "amenities": [],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-3_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-3_400w_thumb.webp",
+        "sort_order": 3
+      }
+    ],
+    "id": 5,
+    "property_type": "commercial",
+    "condition": "rent",
+    "price": "900000.00",
+    "currency": "ARS",
+    "department": "capital",
+    "full_address": "SAN MARTIN 1100, CIUDAD, MENDOZA",
+    "key_attributes": {
+      "total_area": "95",
+      "bathrooms": "1"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "95",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bathrooms",
+        "value": "1",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      }
+    ],
+    "created_at": "2026-11-22T16:20:00.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": "1ra_seccion_parque_central",
+    "neighborhood_or_street": "San Martín 1100",
+    "has_expenses": false,
+    "expenses": null,
+    "expenses_currency": null,
+    "title": "Local comercial sobre peatonal",
+    "description": "Local a la calle con vidriera sobre peatonal Sarmiento, baño y depósito.",
+    "latitude": null,
+    "longitude": null,
+    "show_map": false,
+    "map_mode": null,
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [
+      {
+        "id": 5,
+        "condition": "rent",
+        "status": "active",
+        "price": "900000.00",
+        "currency": "ARS"
+      }
+    ],
+    "amenities": [],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-3_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-3_400w_thumb.webp",
+        "sort_order": 3
+      }
+    ],
+    "id": 6,
+    "property_type": "commercial",
+    "condition": "sale",
+    "price": "185000.00",
+    "currency": "USD",
+    "department": "capital",
+    "full_address": "SAN MARTIN 1100, CIUDAD, MENDOZA",
+    "key_attributes": {
+      "total_area": "95",
+      "bathrooms": "1"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "95",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bathrooms",
+        "value": "1",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      }
+    ],
+    "created_at": "2026-11-22T16:21:00.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/5/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": null,
+    "neighborhood_or_street": "Ruta 92",
+    "has_expenses": false,
+    "expenses": null,
+    "expenses_currency": null,
+    "title": "Finca con viñedo en producción",
+    "description": "Finca de 12 hectáreas con viñedo de Malbec en producción, casa principal y galpón.",
+    "latitude": null,
+    "longitude": null,
+    "show_map": false,
+    "map_mode": null,
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-3_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-3_400w_thumb.webp",
+        "sort_order": 3
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-4_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-4_400w_thumb.webp",
+        "sort_order": 4
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-5_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-5_400w_thumb.webp",
+        "sort_order": 5
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-6_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-6_400w_thumb.webp",
+        "sort_order": 6
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-7_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-7_400w_thumb.webp",
+        "sort_order": 7
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-8_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-8_400w_thumb.webp",
+        "sort_order": 8
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-9_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-9_400w_thumb.webp",
+        "sort_order": 9
+      }
+    ],
+    "id": 7,
+    "property_type": "farm",
+    "condition": "sale",
+    "price": "1450000.00",
+    "currency": "USD",
+    "department": "lujan_de_cuyo",
+    "full_address": "RUTA 92 KM 14, LUJAN DE CUYO, MENDOZA",
+    "key_attributes": {
+      "total_area": "120000",
+      "bedrooms": "5",
+      "bathrooms": "3"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "120000",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bedrooms",
+        "value": "5",
+        "label": "Dormitorios",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "bathrooms",
+        "value": "3",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "age",
+        "value": "45",
+        "label": "Antigüedad",
+        "suffix": "años",
+        "section": "general"
+      }
+    ],
+    "created_at": "2026-10-30T08:00:00.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/7/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": "5ta_seccion_residencial_sur",
+    "neighborhood_or_street": "Belgrano 800",
+    "has_expenses": false,
+    "expenses": null,
+    "expenses_currency": null,
+    "title": "Cochera cubierta en edificio",
+    "description": null,
+    "latitude": null,
+    "longitude": null,
+    "show_map": false,
+    "map_mode": null,
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/8/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/8/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/8/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/8/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      }
+    ],
+    "id": 8,
+    "property_type": "garage",
+    "condition": "sale",
+    "price": "18000.00",
+    "currency": "USD",
+    "department": "capital",
+    "full_address": "BELGRANO 800, CIUDAD, MENDOZA",
+    "key_attributes": {
+      "total_area": "14"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "14",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      }
+    ],
+    "created_at": "2026-11-27T10:00:00.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/8/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/8/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": "vistalba",
+    "neighborhood_or_street": "Barrio Privado Palmares",
+    "has_expenses": false,
+    "expenses": null,
+    "expenses_currency": null,
+    "title": "Casa en barrio privado por temporada",
+    "description": "Casa amoblada en barrio privado con seguridad 24 horas, piscina y acceso a club house.",
+    "latitude": -32.9951,
+    "longitude": -68.8912,
+    "show_map": true,
+    "map_mode": "radius",
+    "map_range": 800,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [
+      {
+        "key": "swimming_pool",
+        "value": "True",
+        "label": "Piscina",
+        "suffix": null,
+        "section": "amenities_comfort"
+      },
+      {
+        "key": "security_24h",
+        "value": "True",
+        "label": "Seguridad 24hs",
+        "suffix": null,
+        "section": "security"
+      },
+      {
+        "key": "event_hall",
+        "value": "True",
+        "label": "Salón de eventos",
+        "suffix": null,
+        "section": "common_areas"
+      }
+    ],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-3_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-3_400w_thumb.webp",
+        "sort_order": 3
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-4_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-4_400w_thumb.webp",
+        "sort_order": 4
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-5_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-5_400w_thumb.webp",
+        "sort_order": 5
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-6_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-6_400w_thumb.webp",
+        "sort_order": 6
+      }
+    ],
+    "id": 9,
+    "property_type": "house",
+    "condition": "temporary_rent",
+    "price": "180000.00",
+    "currency": "ARS",
+    "department": "lujan_de_cuyo",
+    "full_address": "BARRIO PRIVADO PALMARES, LOTE 44, LUJAN DE CUYO, MENDOZA",
+    "key_attributes": {
+      "bedrooms": "3",
+      "bathrooms": "2",
+      "total_area": "420",
+      "covered_area": "180",
+      "garage_capacity": "1"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "420",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "covered_area",
+        "value": "180",
+        "label": "Superficie Cubierta",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bedrooms",
+        "value": "3",
+        "label": "Dormitorios",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "bathrooms",
+        "value": "2",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "garage_capacity",
+        "value": "1",
+        "label": "Cocheras",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "gated_community",
+        "value": "si",
+        "label": "Barrio cerrado",
+        "suffix": null,
+        "section": "general"
+      },
+      {
+        "key": "age",
+        "value": "3",
+        "label": "Antigüedad",
+        "suffix": "años",
+        "section": "general"
+      }
+    ],
+    "created_at": "2026-11-25T13:00:00.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/9/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  },
+  {
+    "province": "mendoza",
+    "zone": "belgrano",
+    "neighborhood_or_street": "Mitre 4500",
+    "has_expenses": false,
+    "expenses": null,
+    "expenses_currency": null,
+    "title": "PH al frente con patio",
+    "description": null,
+    "latitude": null,
+    "longitude": null,
+    "show_map": false,
+    "map_mode": null,
+    "map_range": null,
+    "video_url": null,
+    "tour360_url": null,
+    "status": "active",
+    "sibling_listings": [],
+    "amenities": [],
+    "nearby_zones": [],
+    "photos": [
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-0_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-0_400w_thumb.webp",
+        "sort_order": 0
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-1_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-1_400w_thumb.webp",
+        "sort_order": 1
+      },
+      {
+        "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-2_1400w_display.webp",
+        "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-2_400w_thumb.webp",
+        "sort_order": 2
+      }
+    ],
+    "id": 10,
+    "property_type": "ph",
+    "condition": "exchange",
+    "price": "140000.00",
+    "currency": "USD",
+    "department": "guaymallen",
+    "full_address": "MITRE 4500, GUAYMALLEN, MENDOZA",
+    "key_attributes": {
+      "bedrooms": "2",
+      "bathrooms": "1",
+      "total_area": "110",
+      "covered_area": "85"
+    },
+    "attributes": [
+      {
+        "key": "total_area",
+        "value": "110",
+        "label": "Superficie Total",
+        "suffix": "m²",
+        "section": "dimensions"
+      },
+      {
+        "key": "bedrooms",
+        "value": "2",
+        "label": "Dormitorios",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "bathrooms",
+        "value": "1",
+        "label": "Baños",
+        "suffix": null,
+        "section": "rooms"
+      },
+      {
+        "key": "age",
+        "value": "28",
+        "label": "Antigüedad",
+        "suffix": "años",
+        "section": "general"
+      }
+    ],
+    "created_at": "2026-11-10T15:45:00.000000Z",
+    "cover_photo": {
+      "url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-0_1400w_display.webp",
+      "thumbnail_url": "https://pub-e1d8737c1ea34b73bd2fa3a6728b0423.r2.dev/development/properties/10/foto-0_400w_thumb.webp",
+      "sort_order": 0
+    }
+  }
+]
