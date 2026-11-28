@@ -43,6 +43,11 @@ export interface DataFailure {
   details: { field: string; message: string }[];
   // Para citarle a quien mantiene la API. No se muestra. Puede ser null en las
   // lecturas cacheadas: ahí el dato queda en el mensaje del log.
+  //
+  // Ojo al reportar: el request_id se genera por pedido en el server, así que
+  // el de una respuesta servida desde el caché apunta al pedido ORIGINAL, no
+  // al momento en que se leyó. El log del server existe igual, pero puede no
+  // reflejar el estado actual del sistema.
   requestId: string | null;
   // Para el log del server. No se muestra.
   cause: unknown;
