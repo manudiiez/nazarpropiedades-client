@@ -42,6 +42,7 @@ lib/data/
   index.ts       ← factory: elige implementación según DATA_SOURCE
   http/          ← implementación contra la API, con `use cache`
   mock/          ← implementación con fixtures, sin red
+lib/filters/     traducción entre la URL del sitio y `ListingFilters`
 lib/forms/       parseo de FormData y estado de formularios (sin Next, testeable)
 lib/actions/     Server Actions
 ```
@@ -65,6 +66,18 @@ lib/actions/     Server Actions
 - Sin resultados, `totalPages` es **0**, no 1: no hay que dibujar paginador.
 - `fuente: "propiedad_individual"` **exige** `listingId` en el formulario de consultas.
 - **Los `instanceof` no sobreviven a `use cache`**: React reconstruye el error y pierde las propiedades propias. En `failures.ts` se discrimina por `error.name`. No refactorizar a `instanceof`.
+
+### Filtros en la URL
+
+`lib/filters` traduce en los dos sentidos: `filtrosDesdeSearchParams(params, catalog)` → `{filtros, descartados}` y `searchParamsDesdeFiltros(filtros, pagina)` → `URLSearchParams`. Los nombres de los params están en `PARAMS`; la UI no escribe strings sueltos.
+
+- **Los params están en español y no son los de la API** (`operacion`, `tipo`, `precio_max`, no `condition`, `property_type`, `price_max`). La URL se comparte por WhatsApp y la indexa Google: es parte del producto. La traducción a la API vive aparte, en `lib/data/http/filters-to-query.ts`.
+- **Los enums que el front define traducen su valor** (`operacion=venta`, `antiguedad=a-estrenar`, `dormitorios=5-o-mas`). Los valores respaldados por el catálogo —tipo de propiedad, provincia, departamento, zona, amenities— **viajan con su slug** (`tipo=house`, `zona=chacras_de_coria`): son 16, 215 y 44 valores que cambian sin avisar, y un diccionario local para traducirlos es el bug de las amenities otra vez.
+- **Multi-valor repetido, no separado por comas**: `?tipo=house&tipo=ph`.
+- **Un valor inválido se ignora, nunca falla.** Es lo contrario de `validateFilters`, y es a propósito: una URL puede ser un link de hace un año. Lo descartado vuelve en `descartados` (`{param, valor, motivo}`) para poder avisar "ignoramos un filtro que ya no existe". Invariante: lo que sale de acá nunca hace lanzar a `validateFilters`.
+- **Los defaults no se serializan**: `orden=reciente` y `pagina=1` se omiten, para que haya una sola URL por contenido. Al parsear, `sort` siempre queda definido (`reciente`), así una URL sin orden y otra con el orden por defecto dan el mismo objeto.
+- **El tamaño de página no viaja en la URL.** `paginaDesdeSearchParams` devuelve siempre `limit: DEFAULT_PAGE_SIZE`: exponerlo sería `?limit=100` gratis y la misma lista en N URLs.
+- `searchParams` es una API dinámica: **no se lee dentro de un scope con `use cache`**. La página la resuelve y le pasa el objeto a estas funciones, que son puras.
 
 ### Caché
 
