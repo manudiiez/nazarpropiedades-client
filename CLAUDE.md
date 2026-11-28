@@ -137,6 +137,18 @@ La ficha. Es la página que indexa Google y la que se comparte, así que las dec
 - **Los atributos nativos (`required`, `type`, `pattern`, `maxLength`) duplican a propósito las reglas de `validateInquiry`**: son lo único que marca un campo mal cargado cuando no hay JavaScript, porque los errores por campo del server llegan por el payload de RSC y no se renderizan. Los del server son los que mandan, porque el endpoint es público.
 - `useId` para los ids: el formulario de una propiedad y el general pueden convivir en la misma página, y dos inputs con el mismo id rompen la asociación del `<label>`.
 
+### Metadata y SEO
+
+`lib/seo` arma los títulos, las descripciones y los datos estructurados; cada ruta los usa en su `generateMetadata`.
+
+- **`SITE_URL` es variable de runtime y se lee con `getSiteUrl()`, no con `getConfig()`**: `getConfig()` exige `DATA_SOURCE` y la metadata del layout se evalúa durante el build, que corre sin variables. Si falta, la metadata sale sin `metadataBase` en vez de romperse.
+- **La metadata de una página prerenderizada se hornea en el build.** La home quedaba con `og:image` apuntando a `http://localhost:3000/opengraph-image` (el default de Next sin `metadataBase`), porque en el build no hay `SITE_URL`. Se arregla con `await connection()` en su `generateMetadata`. El listado y la ficha no tenían el problema: su metadata ya se genera por request.
+- **El tipo de propiedad no se pluraliza en los títulos.** Las etiquetas vienen del catálogo y el plural en español no es agregar una "s" (`Local comercial` → `Local comerciales`, `PH` → `PHs`). Sin un tipo único, el título dice "Propiedades".
+- **`noindex, follow` en los filtros profundos** (precio, superficie, ambientes, amenities, dirección, orden distinto del default, multi-valor, página > 1). `follow` igual: no se indexa la URL, pero las fichas se descubren desde cualquier listado.
+- **Las coordenadas del JSON-LD siguen la misma regla que el mapa**: solo con `showMap` y `mode: "exact"`. Publicar el punto en los datos estructurados cuando la UI muestra el área es filtrarlo por JSON.
+- **El JSON-LD se escapa con `jsonLdAHtml`**: la descripción la escribe el CRM, y un `</script>` ahí adentro cierra la etiqueta. Es XSS almacenado, no un detalle de formato.
+- La imagen por defecto de Open Graph la genera `app/opengraph-image.tsx` con `next/og`, que es parte de Next: no hay un PNG en `public/` que mantener. Cuando haya diseño, se reemplaza ahí.
+
 ### Caché
 
 `use cache` va en las funciones de los repositorios, **no en `HttpClient`**: los argumentos de una función cacheada tienen que ser serializables, y ni una instancia de clase ni un `AbortSignal` lo son.
@@ -186,6 +198,7 @@ Con `cacheComponents`, una ruta que bloquea esperando datos dinámicos **falla e
 |---|---|
 | `DATA_SOURCE` | `api` o `mock`. Sin valor válido, la app no arranca. |
 | `API_URL` | URL de la API. Variable de **runtime**, no build-arg. |
+| `SITE_URL` | URL pública del sitio, para las canónicas y el Open Graph. Runtime. Sin ella, lo que se comparte no resuelve la imagen. |
 
 **No hay ninguna `NEXT_PUBLIC_*`.** Ningún pedido sale del browser, ni el POST del formulario (va por Server Action reenviando la IP del visitante en `X-Forwarded-For`, para que el rate limit de la API cuente por visitante). Por eso la **misma imagen `vX.Y.Z` sirve staging y producción**.
 

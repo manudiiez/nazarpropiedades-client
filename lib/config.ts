@@ -85,7 +85,41 @@ export function getConfig(): Config {
   return cached;
 }
 
+// La URL pública del sitio, para las canónicas y el Open Graph: sin una URL
+// absoluta, lo que se comparte por WhatsApp no resuelve la imagen.
+//
+// Se lee APARTE de `getConfig()` a propósito. `getConfig()` exige `DATA_SOURCE`
+// y la metadata del layout se evalúa durante el build, que corre SIN variables
+// de entorno (ninguna es build-arg): si tirara, no habría build.
+//
+// Es variable de runtime, así que staging y producción usan la misma imagen con
+// distinta URL. Si falta, la metadata sale con URLs relativas en vez de
+// romperse: se pierde la imagen al compartir, no la página.
+let siteUrlAvisado = false;
+
+export function getSiteUrl(): string | null {
+  const raw = process.env.SITE_URL;
+  if (raw === undefined || raw.trim() === "") {
+    if (!siteUrlAvisado) {
+      siteUrlAvisado = true;
+      console.warn(
+        "[config] Falta SITE_URL: las URLs canónicas y las imágenes de Open Graph " +
+          "van a salir relativas. Configurala con la URL pública del sitio.",
+      );
+    }
+    return null;
+  }
+
+  try {
+    return new URL(raw.trim()).origin;
+  } catch {
+    console.warn(`[config] SITE_URL no es una URL válida: "${raw}". Se ignora.`);
+    return null;
+  }
+}
+
 // Solo para los tests: permite releer el entorno.
 export function resetConfigCache(): void {
   cached = null;
+  siteUrlAvisado = false;
 }

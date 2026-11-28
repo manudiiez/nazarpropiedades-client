@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { connection } from "next/server";
 import { notFound, redirect } from "next/navigation";
 import { FallaDeDatos } from "@/components/falla-de-datos";
@@ -11,6 +12,13 @@ import { MapaDePropiedad } from "@/components/propiedades/mapa-de-propiedad";
 import { OtrosAvisos } from "@/components/propiedades/otros-avisos";
 import { getCatalog, getListing, getRelatedListings } from "@/lib/data/queries";
 import { CONSULTA_ENVIADA, PARAM_CONSULTA } from "@/lib/forms/consulta";
+import {
+  descripcionDePropiedad,
+  fotosParaCompartir,
+  jsonLdAHtml,
+  jsonLdDePropiedad,
+} from "@/lib/seo";
+import { getSiteUrl } from "@/lib/config";
 import {
   formatearExpensas,
   formatearPrecioPorMes,
@@ -49,6 +57,56 @@ import {
 // contenido. En la página que tiene que indexar Google eso no es un detalle.
 type PropsDeLaRuta = PageProps<"/propiedad/[id]/[[...slug]]">;
 
+// Un id no numérico no es una propiedad que falte: es una URL que no existe, y
+// se descarta sin tocar la red.
+function idDeParam(crudo: string): number | null {
+  if (!/^\d+$/.test(crudo)) return null;
+  const id = Number(crudo);
+  return Number.isSafeInteger(id) && id > 0 ? id : null;
+}
+
+// Esta es la página que se comparte por WhatsApp y la que llega desde Google,
+// así que la metadata no es decorativa.
+//
+// Pide la misma propiedad que la página: Next deduplica el pedido y además la
+// lectura está cacheada con `use cache`, así que no son dos viajes a la API.
+export async function generateMetadata({ params }: PropsDeLaRuta): Promise<Metadata> {
+  const { id: crudo } = await params;
+  const id = idDeParam(crudo);
+  // Sin propiedad no hay nada que describir. El `noindex` es por las dudas: la
+  // página va a devolver 404, pero con streaming el status es 200 (ver abajo).
+  const sinPropiedad: Metadata = {
+    title: "No encontramos esta propiedad",
+    robots: { index: false, follow: true },
+  };
+  if (id === null) return sinPropiedad;
+
+  const resultado = await getListing(id);
+  if (!resultado.ok || resultado.data === null) return sinPropiedad;
+
+  const listing = resultado.data;
+  const titulo = tituloDePropiedad(listing);
+  const descripcion = descripcionDePropiedad(listing);
+  // Una sola forma canónica: la URL con el slug derivado. Las otras redirigen,
+  // pero la canónica lo deja explícito para los buscadores.
+  const url = urlDePropiedad(listing);
+
+  return {
+    title: titulo,
+    description: descripcion,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      title: titulo,
+      description: descripcion,
+      url,
+      // Sin fotos procesadas se cae a la imagen por defecto del sitio
+      // (`app/opengraph-image.tsx`), que hereda del layout.
+      images: fotosParaCompartir(listing),
+    },
+  };
+}
+
 export default function PropiedadPage({ params, searchParams }: PropsDeLaRuta) {
   return (
     <Suspense fallback={<p className="px-4 py-8">Cargando la propiedad…</p>}>
@@ -68,8 +126,8 @@ async function Ficha({
 
   // Un id no numérico es 404 sin tocar la red: `/propiedad/casa-linda` no es
   // una propiedad que falte, es una URL que no existe.
-  const id = Number(crudo);
-  if (!/^\d+$/.test(crudo) || !Number.isSafeInteger(id) || id <= 0) notFound();
+  const id = idDeParam(crudo);
+  if (id === null) notFound();
 
   const [resultado, catalogo] = await Promise.all([getListing(id), getCatalog()]);
 
@@ -101,11 +159,27 @@ async function Ficha({
 
   const catalog = catalogo.ok ? catalogo.data : {};
   const titulo = tituloDePropiedad(listing);
+  const siteUrl = getSiteUrl();
+  // Los datos estructurados. El `url` va absoluto porque schema.org lo pide
+  // así; sin SITE_URL se omite en vez de inventar un dominio.
+  const jsonLd = jsonLdDePropiedad(
+    listing,
+    siteUrl === null ? null : `${siteUrl}${urlDePropiedad(listing)}`,
+  );
   const expensas = formatearExpensas(listing.expenses);
   const ubicacion = textoDeUbicacion(listing.location);
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8">
+      {/* Los datos estructurados, para que Google entienda qué es esta página
+          en vez de deducirlo del texto. `jsonLdAHtml` escapa el "<": la
+          descripción la escribe el CRM y un "</script>" ahí adentro cerraría
+          la etiqueta. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdAHtml(jsonLd) }}
+      />
+
       <header className="flex flex-col gap-1">
         <h1 className="text-2xl font-semibold">{titulo}</h1>
         <p>
