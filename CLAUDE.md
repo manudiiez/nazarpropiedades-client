@@ -101,6 +101,27 @@ Las fotos vienen del bucket de Cloudflare R2 de la API, y el host está declarad
 - **La miniatura mide 400x300 y `400` no es un ancho permitido** por los `imageSizes`/`deviceSizes` por defecto de Next: pedirla con `w=400` da 400 Bad Request. Para las tarjetas hay que dejar que Next elija (`sizes`) o usar `384`.
 - `thumbnail_url` puede ser `null`, y `cover_photo` puede ser `null` con `photos: []` aunque la propiedad sea válida: el worker de imágenes todavía no terminó. El componente tiene que mostrar un placeholder, no romperse.
 
+### Errores en la UI
+
+Tres boundaries en `app/`, y un componente para las fallas de datos:
+
+| Archivo | Cubre |
+|---|---|
+| `app/error.tsx` | Bugs de render en cualquier ruta. Client Component (lo exige Next). |
+| `app/global-error.tsx` | Un error en el layout raíz. Trae sus propios `<html>`/`<body>`. |
+| `app/not-found.tsx` | Los `notFound()` y las URLs que no matchean ninguna ruta. |
+| `components/falla-de-datos.tsx` | Un `DataResult` con `ok: false`. |
+
+- **En Next 16 el prop del boundary es `retry`, no `reset`** (`reset` existe pero solo limpia el estado sin volver a pedir), y **`error` viene tipado `unknown`**: lo que se lanza en un Client Component viaja tal cual y puede no ser un `Error`. Hay que angostarlo.
+- **No se muestra nunca el `message` del error.** En producción el de un Server Component ya es genérico, pero **en desarrollo llega el original**, con rutas y URLs internas. Lo que se loguea del lado del cliente es `error.digest` (`lib/ui/errores.ts`): es lo único que correlaciona lo que vio el visitante con el log del server.
+- **Reintentar solo cuando sirve.** En los boundaries es `retry()`. En una falla de datos, en cambio, no hubo excepción: la página renderizó y la lectura devolvió `{ok: false}`, así que hay que volver a pedir los datos con `router.refresh()` (`components/boton-reintentar.tsx`, el único componente de cliente de esa pantalla). Si `failure.retryable` es `false`, no se ofrece el botón: reintentar devuelve lo mismo.
+- **`global-error` no recibe los estilos globales** y no puede exportar `metadata`: de ahí los estilos inline y el `<title>` de React. No es desprolijidad.
+- Un listado vacío y un detalle inexistente **no** son errores: `items: []` y `data: null` se resuelven con "no encontramos propiedades" o `notFound()`.
+
+### Prerender bloqueante (`instant`)
+
+Con `cacheComponents`, una ruta que bloquea esperando datos dinámicos **falla el build** con `blocking-prerender-dynamic`. Las salidas son envolver la parte dinámica en un `<Suspense>` (que es lo que conviene para una página de verdad) o declarar `export const instant = false` en la ruta. Apareció al probar los boundaries con rutas dinámicas; va a volver a aparecer en el listado y el detalle.
+
 ### Variables de entorno
 
 | Variable | Para qué |
