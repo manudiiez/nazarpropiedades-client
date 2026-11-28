@@ -67,6 +67,18 @@ lib/actions/     Server Actions
 - `fuente: "propiedad_individual"` **exige** `listingId` en el formulario de consultas.
 - **Los `instanceof` no sobreviven a `use cache`**: React reconstruye el error y pierde las propiedades propias. En `failures.ts` se discrimina por `error.name`. No refactorizar a `instanceof`.
 
+### Formateo
+
+Precios, superficies, atributos y fechas se formatean en `lib/format`, con funciones puras. **Ningún componente formatea números por su cuenta**: si eso se duplica, cada sección termina con su propio criterio.
+
+- **La moneda nunca se muestra sin su símbolo o código, y nunca se convierte.** La API no convierte, y hacerlo acá implicaría una cotización que nadie mantiene. USD va como `USD 320.000`, ARS como `$ 450.000`, sin decimales.
+- **Un alquiler lleva "por mes"** (`formatearPrecioPorMes`, que usa `isRental`): mostrar un alquiler como precio total es un error de lectura caro.
+- **Un precio en 0 no es un precio**: se muestra `Consultar precio`, porque "$ 0" parece un error del sitio.
+- **Lo que no se puede mostrar devuelve `null`**, no `""`: así el componente no dibuja la línea en lugar de dibujarla vacía. Vale para las expensas ausentes y para los atributos sin valor.
+- **El sufijo lo manda la API** en cada atributo; no se inventa. El `0` y los booleanos se muestran (`Sí`/`No`): "sin cochera" es un dato, no ausencia de dato.
+- **Las claves de `keyAttributes` varían por propiedad** y el tipo es `Partial`: todo formateador que las consuma maneja `undefined`, que es el caso normal.
+- **Las fechas van relativas hasta 30 días** y absolutas después: nadie lee "hace 237 días". `formatearFecha` recibe `ahora` como parámetro para poder testearlo. Ojo: en español `numeric: "auto"` devuelve "ayer" y "anteayer", no solo "hace N días", así que la preposición de "Publicado …" no se puede decidir con un `startsWith("hace")`.
+
 ### Filtros en la URL
 
 `lib/filters` traduce en los dos sentidos: `filtrosDesdeSearchParams(params, catalog)` → `{filtros, descartados}` y `searchParamsDesdeFiltros(filtros, pagina)` → `URLSearchParams`. Los nombres de los params están en `PARAMS`; la UI no escribe strings sueltos.
