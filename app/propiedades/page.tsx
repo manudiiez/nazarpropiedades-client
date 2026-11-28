@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { connection } from "next/server";
 import { FallaDeDatos } from "@/components/falla-de-datos";
 import { AvisoDeDescartados } from "@/components/propiedades/aviso-de-descartados";
@@ -9,7 +10,9 @@ import { PaginaFueraDeRango } from "@/components/propiedades/pagina-fuera-de-ran
 import { Paginador } from "@/components/propiedades/paginador";
 import { SinResultados } from "@/components/propiedades/sin-resultados";
 import { searchListings } from "@/lib/data/queries";
+import { urlDelListado } from "@/lib/filters";
 import { pluralizar } from "@/lib/format";
+import { debeIndexar, descripcionDeListado, tituloDeListado } from "@/lib/seo";
 import { resolverConsulta, type Consulta } from "./consulta";
 
 // El listado: la ruta principal del sitio.
@@ -28,6 +31,34 @@ import { resolverConsulta, type Consulta } from "./consulta";
 // `resolverConsulta` se llama una vez y la promesa se comparte: las dos
 // secciones hacen `await` de la MISMA, así que el parseo y las lecturas del
 // catálogo no se hacen dos veces.
+
+// El título refleja los filtros ("Casa en venta en Chacras de Coria"), y las
+// combinaciones profundas van con `noindex, follow`: miles de URLs casi
+// iguales compiten entre sí y reparten la autoridad del sitio. `follow` igual,
+// así que las fichas se descubren desde cualquier listado.
+//
+// Usa la misma `resolverConsulta` que la página: las lecturas están cacheadas,
+// así que no son dos viajes a la API.
+export async function generateMetadata({
+  searchParams,
+}: PageProps<"/propiedades">): Promise<Metadata> {
+  const { filtros, pagina, catalog } = await resolverConsulta(searchParams);
+  const titulo = tituloDeListado(filtros, catalog, pagina.page);
+  const descripcion = descripcionDeListado(filtros, catalog);
+  // La canónica es la URL mínima que produce esta misma lista: los defaults no
+  // se serializan, así que `?pagina=1` y `?orden=reciente` no generan otra URL.
+  const url = urlDelListado(filtros, pagina.page);
+
+  return {
+    title: titulo,
+    description: descripcion,
+    alternates: { canonical: url },
+    robots: debeIndexar({ filtros, pagina: pagina.page })
+      ? undefined
+      : { index: false, follow: true },
+    openGraph: { type: "website", title: titulo, description: descripcion, url },
+  };
+}
 
 export default function PropiedadesPage({ searchParams }: PageProps<"/propiedades">) {
   const consulta = resolverConsulta(searchParams);

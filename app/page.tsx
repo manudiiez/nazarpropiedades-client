@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { connection } from "next/server";
 import { ConsultaEnviada } from "@/components/consulta-enviada";
@@ -29,6 +30,20 @@ import { formatearEntero } from "@/lib/format";
 //
 // No cuesta pedidos extra: el caché sigue estando donde importa, en los
 // repositorios (`use cache`), que es lo que protege del rate limit de la API.
+
+// El título y la descripción salen del layout. Lo propio es la canónica: la
+// home se linkea como "/", "/?consulta=enviada" y con los utm de cualquier
+// campaña, y todas son la misma página.
+//
+// El `await connection()` no es decorativo: sin él la metadata se prerenderiza
+// en el build, que corre SIN `SITE_URL`, y el `og:image` quedaba horneado como
+// `http://localhost:3000/opengraph-image` — el default de Next cuando no hay
+// `metadataBase`. Lo verificamos en el HTML servido. El listado y la ficha no
+// tenían el problema porque su metadata ya se genera por request.
+export async function generateMetadata(): Promise<Metadata> {
+  await connection();
+  return { alternates: { canonical: "/" } };
+}
 
 export default function Home({ searchParams }: PageProps<"/">) {
   return (
