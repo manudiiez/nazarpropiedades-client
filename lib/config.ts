@@ -118,6 +118,20 @@ export function getSiteUrl(): string | null {
   }
 }
 
+// En qué entorno corre el sitio. Lo único que depende de esto es si se invita
+// a los buscadores a indexar: staging sirve el MISMO contenido que producción,
+// y si se indexa compite con el sitio real por las mismas búsquedas.
+//
+// Se llama como en la API (`APP_ENV`) para no tener dos nombres para lo mismo.
+//
+// El default es "no es producción" a propósito: si falta la variable, lo peor
+// que pasa es que el sitio no se indexe —se ve en /robots.txt y se arregla
+// configurándola—, mientras que el default contrario indexa staging sin que
+// nadie se entere hasta que aparece en Google.
+export function esProduccion(): boolean {
+  return process.env.APP_ENV?.trim().toLowerCase() === "production";
+}
+
 // Solo para los tests: permite releer el entorno.
 export function resetConfigCache(): void {
   cached = null;
