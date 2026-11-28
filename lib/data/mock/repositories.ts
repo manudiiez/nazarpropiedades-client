@@ -46,7 +46,9 @@ function paginate<T>(items: T[], page: PageRequest): Page<T> {
     page: numero,
     limit,
     total: items.length,
-    totalPages: Math.max(Math.ceil(items.length / limit), 1),
+    // Sin resultados la API devuelve 0, no 1. El mock espeja a la API, no al
+    // revés: la UI no debe dibujar paginador cuando total es 0.
+    totalPages: Math.ceil(items.length / limit),
   };
 }
 

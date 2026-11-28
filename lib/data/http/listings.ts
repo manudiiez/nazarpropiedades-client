@@ -64,8 +64,17 @@ async function fetchRawList(baseUrl: string, path: string, query: QueryParams): 
   "use cache";
   cacheLife("minutes");
   cacheTag("listings");
-  const data = await fetchJson<unknown>(baseUrl, path, query);
-  return Array.isArray(data) ? data : [];
+  try {
+    const data = await fetchJson<unknown>(baseUrl, path, query);
+    return Array.isArray(data) ? data : [];
+  } catch (error) {
+    // Un 404 acá significa que la propiedad base no existe. Para una sección
+    // accesoria como "relacionadas" eso es "no hay nada que mostrar", no un
+    // error: quién pregunta por la existencia es getById, que devuelve null.
+    // Sin esto, la implementación HTTP lanzaba donde la mock devolvía vacío.
+    if (error instanceof NotFoundError) return [];
+    throw error;
+  }
 }
 
 async function fetchRawBatch(baseUrl: string, ids: number[]): Promise<RawPage<unknown>> {
