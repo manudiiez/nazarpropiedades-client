@@ -39,8 +39,7 @@ function build(): Repositories {
   return {
     listings: createHttpListingsRepository(config.apiUrl),
     catalogs: createHttpCatalogsRepository(config.apiUrl),
-    // Este sale del browser, así que usa la URL pública.
-    inquiries: createHttpInquiriesRepository(config.publicApiUrl),
+    inquiries: createHttpInquiriesRepository(config.apiUrl),
   };
 }
 
