@@ -14,9 +14,10 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# Las NEXT_PUBLIC_* se hornean acá: tienen que llegar como build-args, no como env del runtime.
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+# No hay build-args de configuración a propósito: ningún pedido a la API sale
+# del browser, así que nada de la API queda horneado en el bundle. La imagen no
+# está atada a un entorno — la MISMA vX.Y.Z sirve staging y producción, con
+# API_URL y DATA_SOURCE como variables del contenedor.
 RUN npm run build
 
 # ---- runner: solo el bundle standalone ----

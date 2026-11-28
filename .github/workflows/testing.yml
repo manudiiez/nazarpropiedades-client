@@ -51,8 +51,6 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          NEXT_PUBLIC_API_URL: ${{ vars.API_URL_TESTING }}
 
   image:
     name: image
@@ -81,8 +79,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          build-args: |
-            NEXT_PUBLIC_API_URL=${{ vars.API_URL_TESTING }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
