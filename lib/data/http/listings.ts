@@ -29,9 +29,17 @@ async function fetchJson<T>(baseUrl: string, path: string, query: QueryParams): 
 
 async function fetchRawCatalog(baseUrl: string): Promise<unknown> {
   "use cache";
-  // Es el dato más estático del sitio: 18 departamentos y 215 zonas que casi
-  // nunca cambian. Un tag propio permite invalidarlo sin tocar las propiedades.
-  cacheLife("days");
+  // Las 215 zonas son una lista en el CÓDIGO de la API, no una tabla: el
+  // catálogo solo cambia cuando la API se despliega, nunca porque el CRM
+  // cargue una propiedad. O sea que un TTL largo no retrasa nada del negocio.
+  //
+  // Igual se usa `hours` y no `days` por un detalle de presentación: las
+  // etiquetas de ubicación de las tarjetas se resuelven contra el catálogo, y
+  // si un deploy agrega zonas, las propiedades en esas zonas muestran la
+  // etiqueta derivada del slug ("Lujan De Cuyo") hasta que el catálogo se
+  // revalide. Con `hours` esa ventana es de una hora en vez de un día, y
+  // cuesta un pedido por hora.
+  cacheLife("hours");
   cacheTag("catalogs");
   return fetchJson<unknown>(baseUrl, "/public/catalogs", {});
 }
