@@ -92,6 +92,15 @@ Las 215 zonas del catálogo son una lista en el **código** de la API, no una ta
 
 Por eso los combos del filtro se arman con **facets, no con el catálogo**: si el CRM carga una propiedad con un slug de zona que no está en el catálogo de la API, no va a aparecer nunca en `/catalogs` pero sí en `/facets`, con su etiqueta derivada. Facets es la verdad sobre lo que hay publicado.
 
+### Imágenes
+
+Las fotos vienen del bucket de Cloudflare R2 de la API, y el host está declarado en `images.remotePatterns` de `next.config.ts`. **Sin eso `next/image` responde 400 y no se ve ninguna foto**, con un error que apunta al componente y no a la configuración.
+
+- El host es el mismo en los tres entornos; lo que cambia es el prefijo del key, que sale de `APP_ENV` en la API: `production` / `development` / `local`. Los tres están declarados, cada uno limitado a `/{entorno}/properties/**`. Nada de comodines: un `remotePatterns` abierto convierte al sitio en un optimizador de imágenes gratis para cualquiera.
+- `remotePatterns` se evalúa **en build**, no en runtime. Si el bucket llegara a cambiar por entorno, la misma imagen Docker deja de servir para los dos.
+- **La miniatura mide 400x300 y `400` no es un ancho permitido** por los `imageSizes`/`deviceSizes` por defecto de Next: pedirla con `w=400` da 400 Bad Request. Para las tarjetas hay que dejar que Next elija (`sizes`) o usar `384`.
+- `thumbnail_url` puede ser `null`, y `cover_photo` puede ser `null` con `photos: []` aunque la propiedad sea válida: el worker de imágenes todavía no terminó. El componente tiene que mostrar un placeholder, no romperse.
+
 ### Variables de entorno
 
 | Variable | Para qué |
