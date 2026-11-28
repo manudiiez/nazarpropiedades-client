@@ -6,6 +6,9 @@ import {
   formatearPrecioPorMes,
   formatearPublicacion,
   resumenDeKeyAttributes,
+  textoDeUbicacion,
+  tituloDePropiedad,
+  urlDePropiedad,
 } from "@/lib/format";
 
 // Una propiedad en el listado. Server Component: no tiene estado ni
@@ -33,17 +36,17 @@ function SinFoto() {
 
 export function TarjetaDePropiedad({ listing }: { listing: ListingSummary }) {
   const { location } = listing;
-  const titulo = `${listing.propertyTypeLabel} en ${listing.conditionLabel.toLowerCase()}`;
+  // El mismo título y la misma URL canónica que usa la ficha: dos versiones
+  // del título de la misma propiedad se desincronizan solas.
+  const titulo = tituloDePropiedad(listing);
   const precio = formatearPrecioPorMes(listing.price, listing.condition);
   const expensas = formatearExpensas(listing.expenses);
   const datos = resumenDeKeyAttributes(listing.keyAttributes);
-  const ubicacion = [location.neighborhoodOrStreet, location.zoneLabel, location.departmentLabel]
-    .filter((parte): parte is string => parte !== null && parte !== "")
-    .join(", ");
+  const ubicacion = textoDeUbicacion(location);
 
   return (
     <article className="flex flex-col gap-2 border p-4">
-      <Link href={`/propiedad/${listing.id}`} className="flex flex-col gap-2">
+      <Link href={urlDePropiedad(listing)} className="flex flex-col gap-2">
         {listing.coverPhoto === null ? (
           <SinFoto />
         ) : (

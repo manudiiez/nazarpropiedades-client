@@ -9,10 +9,11 @@ import {
   OPCIONES_COCHERAS,
   OPCIONES_ORDEN,
   PARAMS,
-  etiquetaDeSeccion,
   urlDelListado,
 } from "@/lib/filters";
-import { formatearEntero } from "@/lib/format";
+// Las etiquetas de las secciones las comparte con la ficha, que agrupa los
+// mismos datos: viven en lib/format.
+import { etiquetaDeSeccion, formatearEntero } from "@/lib/format";
 
 // El formulario de filtros. Server Component: no hay estado de cliente, el
 // submit es una Server Action y el estado del filtro vive en la URL.

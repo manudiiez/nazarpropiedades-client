@@ -29,9 +29,25 @@ export function formatearValorDeAtributo(
   }
 
   // Texto: puede venir con espacios de sobra desde el CRM.
-  const texto = String(valor).trim();
+  const texto = normalizarTexto(String(valor).trim());
   if (texto === "") return null;
   return suffix === null || suffix === "" ? texto : `${texto} ${suffix}`;
+}
+
+// Algunos atributos traen el valor de un enum de la API en crudo
+// (`garage_type: "garage_doble"`, `conservation_state: "excelente"`). La
+// etiqueta del atributo sí viene lista, pero el VALOR no tiene ningún endpoint
+// que lo traduzca, así que "garage_doble" terminaría en la ficha tal cual.
+//
+// Se normaliza solo cuando el texto tiene pinta de slug —todo en minúscula y
+// sin espacios—, para no tocar lo que el CRM escribió a mano ("Norte",
+// "Sobre calle principal"). Es un parche de presentación: lo correcto es que la
+// API mande la etiqueta del valor, y mientras no lo haga esto evita mostrar un
+// identificador en la página que más se comparte.
+function normalizarTexto(texto: string): string {
+  if (!/^[a-z0-9]+([_-][a-z0-9]+)*$/.test(texto)) return texto;
+  const palabras = texto.replace(/[_-]+/g, " ");
+  return palabras.charAt(0).toUpperCase() + palabras.slice(1);
 }
 
 // "620 m²". El sufijo por defecto es "m²" porque es el de las superficies de

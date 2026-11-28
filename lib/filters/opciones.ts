@@ -2,7 +2,6 @@ import {
   AGE_RANGES,
   LISTING_SORTS,
   type AgeRange,
-  type AmenitySection,
   type GarageCount,
   type ListingSort,
   type RoomCount,
@@ -106,20 +105,3 @@ export const OPCIONES_BARRIO_CERRADO: OpcionDeFiltro<boolean>[] = [
   { dominio: true, valor: "si", etiqueta: "Solo en barrio cerrado o semiprivado" },
   { dominio: false, valor: "no", etiqueta: "Solo fuera de un barrio cerrado" },
 ];
-
-// Las amenities vienen agrupadas por sección, pero la API manda la clave de la
-// sección, no su nombre. Estos son los únicos nombres que el front pone sobre
-// datos del catálogo, porque no hay ningún endpoint que los traiga.
-export const ETIQUETAS_DE_SECCION: Record<AmenitySection, string> = {
-  utilities: "Servicios",
-  security: "Seguridad",
-  amenities_rooms: "Ambientes",
-  amenities_comfort: "Confort",
-  common_areas: "Espacios comunes",
-};
-
-// `null` es una sección que la API agregó y el front todavía no conoce: se
-// muestra agrupada aparte en vez de perder la amenity.
-export function etiquetaDeSeccion(section: AmenitySection | null): string {
-  return section === null ? "Otras" : ETIQUETAS_DE_SECCION[section];
-}
