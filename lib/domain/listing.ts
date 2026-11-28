@@ -1,14 +1,14 @@
-import type { Condition, Currency, ListingStatus, PropertyType } from "./enums";
+import type { Condition, Currency, ListingStatus } from "./enums";
 
-// Una foto ya procesada por el worker de la API. `thumbnailUrl` puede faltar.
 export interface Photo {
   url: string;
   thumbnailUrl: string | null;
   sortOrder: number;
 }
 
-// Atributo listo para renderizar: la API manda `label` y `suffix`, así que el
-// front NO tiene su propio diccionario de etiquetas. `section` sirve para agrupar.
+// Atributo listo para renderizar: la etiqueta y el sufijo los manda la API.
+// `value` ya viene parseado: la API lo serializa como string (el JSONB guarda
+// lo que mandó el CRM) y el mapper lo convierte a número cuando corresponde.
 export interface AttributeItem {
   key: string;
   value: string | number | boolean;
@@ -17,41 +17,40 @@ export interface AttributeItem {
   section: string | null;
 }
 
-// La API elige hasta 5 claves por prioridad (bedrooms, bathrooms, total_area,
-// garage_capacity, covered_area, floors, orientation, storage_units, age) y
-// saltea las que son null, 0 o "". O sea: las claves varían por propiedad y
-// nada garantiza que una esté presente. No se puede tipar como objeto fijo.
-// `Partial` es deliberado: hace que leer cualquier clave tipe como
-// `string | number | undefined`, así el compilador obliga a manejar la ausencia
-// sin depender de `noUncheckedIndexedAccess` a nivel proyecto.
+// Resumen de hasta 5 atributos que la API elige por prioridad, salteando los
+// que son null, 0 o "". Las claves VARÍAN por propiedad: `Partial` fuerza a
+// manejar la ausencia en vez de confiar en que estén.
 export type KeyAttributes = Readonly<Partial<Record<string, string | number>>>;
-
-// Otro listing de la misma propiedad, p. ej. la misma casa en venta y en alquiler.
-export interface SiblingListing {
-  id: number;
-  condition: Condition;
-  status: ListingStatus;
-  price: number;
-  currency: Currency;
-}
 
 export interface Money {
   amount: number;
   currency: Currency;
 }
 
+export interface SiblingListing {
+  id: number;
+  condition: Condition;
+  status: ListingStatus;
+  price: Money;
+}
+
+// Los tres primeros son valores del catálogo: acá viaja el valor crudo
+// (`godoy_cruz`) y la etiqueta se resuelve contra el catálogo al mapear.
 export interface Location {
   province: string;
+  provinceLabel: string;
   department: string;
+  departmentLabel: string;
   zone: string | null;
+  zoneLabel: string | null;
   neighborhoodOrStreet: string | null;
-  // Dirección exacta. Hoy la API la expone al público en listado y detalle.
+  // La API la devuelve en MAYÚSCULAS, como la cargaron en el CRM. El mapper la
+  // normaliza: normalizarla del lado del server taparía el problema de carga.
   fullAddress: string;
 }
 
-// Cómo quiere la API que se muestre el mapa. `showMap` manda: puede haber
-// coordenadas cargadas y aun así no corresponder dibujar el mapa.
 export interface MapSettings {
+  // Manda sobre lat/lng: puede haber coordenadas y no corresponder el mapa.
   showMap: boolean;
   latitude: number | null;
   longitude: number | null;
@@ -59,22 +58,35 @@ export interface MapSettings {
   range: number | null;
 }
 
-// Lo que devuelve el listado. Deliberadamente más chico que `Listing`.
-export interface ListingSummary {
+// Lo común al resumen y a la ficha.
+//
+// NO existe `Listing extends ListingSummary`: el detalle de la API no es un
+// superconjunto del listado. `keyAttributes` solo viene en el listado, y en el
+// detalle lo reemplaza `attributes` enriquecido. Son dos vistas distintas de lo
+// mismo, no una contenida en la otra.
+export interface ListingBase {
   id: number;
-  propertyType: PropertyType;
+  // Valor del catálogo (`house`, `semi-floor`, …). La etiqueta va aparte: si la
+  // API agrega un tipo nuevo, el front lo muestra igual en vez de romperse.
+  propertyType: string;
+  propertyTypeLabel: string;
   condition: Condition;
+  conditionLabel: string;
   price: Money;
   expenses: Money | null;
   location: Location;
-  keyAttributes: KeyAttributes;
-  // null mientras el worker no terminó de procesar las imágenes.
-  coverPhoto: Photo | null;
   createdAt: Date;
 }
 
-// El detalle completo.
-export interface Listing extends ListingSummary {
+// Lo que devuelve el listado.
+export interface ListingSummary extends ListingBase {
+  keyAttributes: KeyAttributes;
+  // null mientras el worker de imágenes no terminó de procesar.
+  coverPhoto: Photo | null;
+}
+
+// Lo que devuelve el detalle.
+export interface Listing extends ListingBase {
   status: ListingStatus;
   title: string | null;
   description: string | null;
