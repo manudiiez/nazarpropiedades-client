@@ -13,9 +13,18 @@ import { PaginaDeEstado } from "./pagina-de-estado";
 // encontramos propiedades" o `notFound()`. Mostrar un cartel de error ahí le
 // dice al visitante que el sitio está roto cuando solo filtró demasiado.
 
-export function FallaDeDatos({ failure }: { failure: DataFailure }) {
+export function FallaDeDatos({
+  failure,
+  // El listado la muestra en lugar de los resultados, dentro de su propio
+  // `<main>`: ahí tiene que ser una `<section>`.
+  como,
+}: {
+  failure: DataFailure;
+  como?: "main" | "section";
+}) {
   return (
     <PaginaDeEstado
+      como={como}
       titulo={failure.title}
       mensaje={failure.message}
       acciones={
