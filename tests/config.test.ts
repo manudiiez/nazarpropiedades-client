@@ -41,7 +41,7 @@ describe("getConfig", () => {
   });
 
   const conEntorno = (env: Record<string, string | undefined>): ReturnType<typeof getConfig> => {
-    for (const clave of ["DATA_SOURCE", "API_URL", "NEXT_PUBLIC_API_URL"]) {
+    for (const clave of ["DATA_SOURCE", "API_URL"]) {
       delete process.env[clave];
     }
     Object.assign(process.env, env);
@@ -49,26 +49,23 @@ describe("getConfig", () => {
     return getConfig();
   };
 
-  it("lee las tres variables", () => {
-    const config = conEntorno({
-      DATA_SOURCE: "api",
-      API_URL: "http://api.local/api/v1",
-      NEXT_PUBLIC_API_URL: "https://publica.local/api/v1",
-    });
+  it("lee las dos variables", () => {
+    const config = conEntorno({ DATA_SOURCE: "api", API_URL: "http://api.local/api/v1" });
     expect(config.dataSource).toBe("api");
     expect(config.apiUrl).toBe("http://api.local/api/v1");
-    expect(config.publicApiUrl).toBe("https://publica.local/api/v1");
+  });
+
+  // No hay ninguna NEXT_PUBLIC_*: todo pedido a la API sale del server, así
+  // que la misma imagen sirve staging y producción.
+  it("no expone ninguna URL al bundle del browser", () => {
+    const config = conEntorno({ DATA_SOURCE: "api", API_URL: "http://api.local/v1" });
+    expect(Object.keys(config)).toEqual(["apiUrl", "dataSource"]);
   });
 
   it("saca la barra final para no generar URLs con //", () => {
     expect(conEntorno({ DATA_SOURCE: "api", API_URL: "http://api.local/v1///" }).apiUrl).toBe(
       "http://api.local/v1",
     );
-  });
-
-  it("si falta NEXT_PUBLIC_API_URL usa API_URL", () => {
-    const config = conEntorno({ DATA_SOURCE: "api", API_URL: "http://api.local/v1" });
-    expect(config.publicApiUrl).toBe("http://api.local/v1");
   });
 
   it("falla nombrando la variable que falta", () => {

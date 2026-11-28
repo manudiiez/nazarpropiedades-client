@@ -30,6 +30,11 @@ export interface HttpClientOptions {
 
 export interface RequestOptions {
   query?: QueryParams;
+  // Headers extra para este pedido. Se usa para reenviar la IP del visitante
+  // en el POST de consultas, así la API cuenta su rate limit por visitante y
+  // no por servidor. No puede ir en una función con `use cache`: los headers
+  // se leen fuera del scope cacheado y se pasan como argumento.
+  headers?: Record<string, string>;
   // Permite cortar el pedido desde afuera. Importante: un AbortSignal NO es
   // serializable, así que una función con `use cache` no puede recibirlo. El
   // caché va en la capa de arriba (los métodos del repositorio), no acá.
@@ -94,9 +99,10 @@ export class HttpClient {
       response = await fetch(url, {
         method,
         signal,
-        headers: body === undefined ? { Accept: "application/json" } : {
+        headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          ...(body === undefined ? {} : { "Content-Type": "application/json" }),
+          ...options.headers,
         },
         body: body === undefined ? undefined : JSON.stringify(body),
       });

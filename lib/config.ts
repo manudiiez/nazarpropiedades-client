@@ -3,6 +3,12 @@ import { parseDataSource, type DataSource } from "./data/data-source";
 // Configuración leída una sola vez. Falla con un mensaje que nombra la variable
 // que falta, en vez de dejar que un `fetch("undefined/api/v1/...")` explote
 // lejos de la causa.
+//
+// No hay ninguna variable NEXT_PUBLIC_*: TODO pedido a la API sale del server,
+// incluido el POST del formulario de consultas, que va por Server Action
+// reenviando la IP del visitante. Eso tiene una consecuencia que importa: nada
+// de la API queda horneado en el bundle, así que la MISMA imagen vX.Y.Z sirve
+// staging y producción cambiando una variable de entorno del contenedor.
 
 export class ConfigError extends Error {
   constructor(message: string) {
@@ -15,10 +21,6 @@ export interface Config {
   // URL de la API para las lecturas, usada SOLO desde el server. Es variable de
   // runtime, no build-arg: así la misma imagen sirve staging y producción.
   apiUrl: string;
-  // URL de la API accesible desde el browser, para el POST de consultas, que no
-  // puede proxearse por el server (el rate limit de 5/min se contaría contra la
-  // IP del server y se agotaría con cinco visitantes por minuto).
-  publicApiUrl: string;
   dataSource: DataSource;
 }
 
@@ -45,18 +47,11 @@ export function getConfig(): Config {
   // Con mocks no hay API a la que apuntar: exigir las URLs obligaría a inventar
   // valores falsos en el .env solo para poder levantar sin backend.
   if (dataSource === "mock") {
-    cached = { apiUrl: "http://mock.local", publicApiUrl: "http://mock.local", dataSource };
+    cached = { apiUrl: "http://mock.local", dataSource };
     return cached;
   }
 
-  cached = {
-    apiUrl: requireUrl(process.env.API_URL, "API_URL"),
-    publicApiUrl: requireUrl(
-      process.env.NEXT_PUBLIC_API_URL ?? process.env.API_URL,
-      "NEXT_PUBLIC_API_URL",
-    ),
-    dataSource,
-  };
+  cached = { apiUrl: requireUrl(process.env.API_URL, "API_URL"), dataSource };
 
   return cached;
 }
